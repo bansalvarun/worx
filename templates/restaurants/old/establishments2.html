@@ -1,0 +1,15 @@
+<h1>Establishment View</h1>
+<ul>
+	{% for establishment in establishments %}
+		<li>{{establishment}}</li>
+		<ul>
+			{% for estab, restos in restos.items %}
+				{% if estab == establishment %}
+					{% for resto in restos %}
+						<li><a href="/restaurants/{{ resto.id }}/menu/">{{resto}}</li>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+	{% endfor %}
+</ul>

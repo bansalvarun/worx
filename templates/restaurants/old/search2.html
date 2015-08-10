@@ -1,0 +1,39 @@
+
+
+{% if restaurants or restaurants_by_locality or restaurants_by_cusines or restaurants_by_estab %}
+<ul>
+	{% if restaurants %}
+		<h3>Results in Restaurants matching name</h3> 
+		{% for restaurant in restaurants %}
+			<li><a href="/restaurants/{{ restaurant.id }}/menu/">{{restaurant}}</a></li>
+		{% endfor %}
+	{% endif %}
+	{% if restaurants_by_locality %}
+	<h3>Restaurants by Locality</h3>
+		{% for restaurants in restaurants_by_locality %}
+			{% for restaurant in restaurants%}
+				<li><a href="/restaurants/{{ restaurant.id }}/menu/">{{restaurant}}, {{restaurant.locality}}</a></li>
+			{%endfor%}
+		{% endfor %}
+	{% endif %}
+	{% if restaurants_by_cusines %}
+	<h3>Restaurants by Cusine</h3>
+
+		{% for restaurant in restaurants_by_cusines %}
+			<li><a href="/restaurants/{{ restaurant.id }}/menu/">{{restaurant}}</a></li>
+		{% endfor %}
+		<!-- {{restaurant.cusines}} -->
+	{% endif %}
+	{% if restaurants_by_estab %}
+	<h3>Restaurants by Establishments</h3>
+		{% for restaurant in restaurants_by_estab %}
+			<li><a href="/restaurants/{{ restaurant.id }}/menu/">{{restaurant}}</a></li>
+		{% endfor %}
+	{% endif %}
+
+
+</ul>
+{% else %}
+	<p>Nothing Found from {{q}}</p>
+{% endif %}
+
