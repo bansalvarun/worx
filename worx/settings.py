@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     # 'apps.people',
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
