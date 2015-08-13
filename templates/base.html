@@ -24,7 +24,7 @@ WRITTEN IN DJANGO
     <meta name="author" content="">
 
    <title>
-      worx{% block title %}{% endblock %}
+      worx.{% block title %}{% endblock %}
    </title>
 <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css">
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.min.js"></script>
@@ -66,7 +66,7 @@ WRITTEN IN DJANGO
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header" >
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" ><!-- data-toggle="collapse"-->
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -143,19 +143,19 @@ WRITTEN IN DJANGO
                 <div class="col-lg-12">
                     <ul class="list-inline">
                         <li>
-                            <a href="#">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#about">About</a>
+                            <a href="/">About</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#services">Services</a>
+                            <a href="/#services">Services</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#contact">Contact</a>
+                            <a href="/#contact">Contact</a>
                         </li>
                     </ul>
                     <p class="copyright text-muted small">Copyright &copy; worx. 2015. All Rights Reserved</p>
