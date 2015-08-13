@@ -4,12 +4,29 @@ from django.db.models import *
 from django.utils import timezone
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
+from allauth.account.signals import user_signed_up
+from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 # Create your models here.
 
 
 class Profile(Model):
 	user = OneToOneField(User, related_name="profile")
+	
+	# def user_signed_up_(request, user, sociallogin=None, **kwargs):
+	# 	if sociallogin:
+	# 		# Extract first / last names from social nets and store on User record
+	# 		if sociallogin.account.provider == 'twitter':
+	# 			name = sociallogin.account.extra_data['name']
+	# 			user.first_name = name.split()[0]
+	# 			user.last_name = name.split()[1]
+	# 		if sociallogin.account.provider == 'facebook':
+	# 			user.first_name = sociallogin.account.extra_data['first_name']
+	# 			user.last_name = sociallogin.account.extra_data['last_name']
+	# 		if sociallogin.account.provider == 'google':
+	# 			user.first_name = sociallogin.account.extra_data['given_name']
+	# 			user.last_name = sociallogin.account.extra_data['family_name']
+	# 		user.save()
 	def __unicode__(self):
 		return self.user.first_name
 
