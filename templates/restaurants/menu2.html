@@ -21,7 +21,8 @@
     
 
   <a name="about"></a>	
-    <div class="intro-header" style="background: url("{%static "uploads/my-bar-cafe-2.jpg" %}") no-repeat center center;background-size: 100% auto;" >
+
+    <div class="intro-header" style="background: url({%static "uploads/my-bar-cafe-2.jpg" %}) no-repeat center center;background-size: 100% auto;" >
         <div class="container">
 
             <div class="row">
@@ -31,7 +32,7 @@
                         <h1>{{restaurant}}, &nbsp{{restaurant.locality}}</h1>
                         <h3>{{restaurant.about}}</h3> 
                         <h3>Phone:&nbsp&nbsp{{restaurant.phone}}</h3>                       
-                        <!-- <hr class="intro-divider"> -->
+                        <hr class="intro-divider">
                         
                         
 
@@ -65,23 +66,24 @@
             {% for dish in dishtype.dish_set.all %}  
               <tr>
                 <td>
-                  <font size="3px">{{dish}}<br></font>
+                  <font size="4px">{{dish}}<br></font>
                   <font style="float:right; margin-top:-25px; padding-bottom:10px">
+				  
 	                  <div class="vote-buttons">
 	                   {{thisUserUpVote}} 
 	                  {% ifequal thisUserUpVote 0 %}
-	                    <button type="button" class="btn btn-default btn-sm">Like</button>
+	                    <button type="button" class="btn btn-info btn-number" ><span class="glyphicon glyphicon-thumbs-up"><span class="badge">{{dish.upvotes}}4</span></span></button>
 	                  {% else %}
-	                    <button type="button" class="btn btn-primary btn-sm">Like</button>
+	                    <button type="button" class="glyphicon glyphicon-thumbs-up"><span class="badge">{{dish.upvotes}}122</span></button>
 	                  {% endifequal %}
 	                  {% ifequal thisUserDownVote 0 %}
-	                    <button type="button" class="btn btn-default btn-sm">Dislike</button>
+                      <button type="button" class="btn btn-info btn-number" ><span class="glyphicon glyphicon-thumbs-down"><span class="badge">{{dish.downvotes}}4</span></span></button>
 	                  {% else %}
-	                    <button type="button" class="btn btn-primary btn-sm">Dislike</button>
+                      <button type="button" class="glyphicon glyphicon-thumbs-down"><span class="badge">{{dish.downvotes}}122</span></button>
 	                  {% endifequal %}
 	                  </div>
                   </font>
-                    <font face="verdana" color="#585858">
+                    <font face="verdana" color="#000000">
                     {% if dish.about %}
                       {{dish.about}}<br>
                     {% endif %}
@@ -99,13 +101,13 @@
                   <div class="input-group">
 							          <span class="input-group-btn ">
 							              <button type="button" class="btn btn-danger  btn-number"  data-type="minus" data-field="quant[2]" onclick="deleteItem('{{price_type.id}}','{{price_type}}', '{{dish}}', '{{price_type.qty}}', '{{price_type.price}}', '{{price_type.id}}item', '{{price_type.id}}')">
-							                <span class="glyphicon glyphicon-minus"></span>
+							                <span class="glyphicon glyphicon-chevron-down"></span>
 							              </button>
 							          </span>
-							          <input type="text" name="quant[2]" id='{{price_type.id}}' class="form-control input-number " value="00" min="1" max="99" >
+							          <input type="text" name="quant[2]" id='{{price_type.id}}' class="form-control input-number " value="0" min="1" max="99" >
 							          <span class="input-group-btn ">
 							              <button type="button" class="btn btn-success btn-number " data-type="plus" data-field="quant[2]" onclick="addItem('{{price_type.id}}','{{price_type}}', '{{dish}}', '{{price_type.qty}}', '{{price_type.price}}', '{{price_type.id}}item', '{{price_type.id}}')">
-							                  <span class="glyphicon glyphicon-plus"></span>
+							                  <span class="glyphicon glyphicon-chevron-up"></span>
 							              </button>
 							          </span>
 							      </div>
@@ -130,7 +132,7 @@
         </div>
 
       {% endfor %}
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      <button type="button" class="btn btn-de btn-lg" data-toggle="modal" data-target="#myModal">
         Cart
       </button>
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

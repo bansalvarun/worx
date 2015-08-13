@@ -35,7 +35,7 @@ def menu(request, url):
 	args = {}
 	args['restaurant'] = restaurant
 	args['dish_price_type_ob'] = dish_price_type_ob;
-	return render(request, 'restaurants/menu.html', args)
+	return render(request, 'restaurants/menu2.html', args)
 
 def cusines(request):
 	cusines = Cusine.objects.all()
