@@ -44,42 +44,54 @@
 		<h4>{{dishtype}}</h4>
 		<blockquote>
 		<ul class="alt">
+			{% if dishtype.about_as_list %}
+			<li><h3><span style="background-color:#f6f6f6; color:black" >|
 			{% for about in dishtype.about_as_list %}
-				<li>{{about}}</li>
+				{{about}} | 
 			{% endfor %}
-		{% for dish in dishtype.dish_set.all %}  
-			<li><div class="row"><h4>{{dish}}</h4></div>
-			<blockquote>
+			</span></h2></li>
+			{% endif %}
 
-			<table class="table table-condensed" style="border:0px">
-			<tbody><tr>
+		{% for dish in dishtype.dish_set.all %}
+			  
+				<li><div class="row"><h4>
+				{{dish}}
+				</h4></div>
+				<blockquote>
 
-			{% for price_type in dish.dish_price_type_set.all %}
-				<td><h4>{{price_type}}</h4>
-				<h5>{{price_type.price}}</h5></td>
-				<td> <div style="width: 65px;margin: 0px auto;">    
-				<div class="input-group">
+				<table class="table table-condensed" style="border:0px">
+				<tbody>
+				{% for price_type in dish.dish_price_type_set.all %}
+				<tr>
+					<td ><h4>
+						{% if dish.vegOrNot == 'V' %}
+							<span style="color:green;padding:0 .5em">&#8865;</span>
+						{% elif dish.vegOrNot == 'N' %}
+							<span style="color:red;padding:0 .5em">&#8865;</span>
+						{% endif %}
+					{{price_type}}  
+					</h4>
+					<h5></h5></td>
+					<td style="float:right; width:40px; margin-right:5px; ">
+						<h4>&#8377;{{price_type.price}}</h4>
+					</td>
+					<td style="float:right; padding-right:0px; width:80px " > 
+						<div class="btn-danger btn-group btn-group-xs " role="group" aria-label="...">
+						  <button type="button" class="btn btn-default" style="height:25px"><span class="glyphicon glyphicon-menu-up"></span></button>
+						  <button type="button" class="btn btn-default" style="height:25px">0</button>
+						  <button type="button" class="btn btn-default" style="height:25px"><span class="glyphicon glyphicon-menu-down"></span></button>
+						</div>
+					</td>
 
-				<button type="button" class="button small"  data-type="minus" data-field="quant[2]" onclick="deleteItem('14','Steamed', 'Chili Momos', 'Steamed', '70', '14item', '14')">
-				<span class="icon fa-chevron-up style2"></span>
-				</button>
-
-				<input type="text" name="quant[2]" id='demo-name' value="0" min="1" max="99" >
-				<button type="button" class="button small " data-type="plus" data-field="quant[2]" onclick="addItem('14','Steamed', 'Chili Momos', 'Steamed', '70', '14item', '14')">
-				<span class="icon fa-chevron-down style2"></span>
-				</button>
-				</div>
-				<p></p>
-				</div>
-				</td>
 				</tr>
-			{% endfor %}
-			</tbody></table>
+				{% endfor %}
+				</tbody></table>
 
-			</blockquote>
+				</blockquote>
 
-			</li>
+				</li>
 		{% endfor %}
+
 		</ul>
 		</blockquote>
 

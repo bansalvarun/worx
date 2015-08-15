@@ -1584,7 +1584,7 @@ h1{border-bottom:5px solid #00BB64;}
 	hr {
 		border: 0;
 		border-bottom: solid 2px #fff;
-		margin: 3em 0;
+		margin: 1em 0;
 	}
 
 		hr.major {
@@ -1592,10 +1592,10 @@ h1{border-bottom:5px solid #00BB64;}
 		}
 
 	blockquote {
-		border-left: solid 4px #fff;
+		border-left: solid 2px #fff;
 		font-style: italic;
-		margin: 0 0 2em 0;
-		padding: 0.5em 0 0.5em 2em;
+		margin: 0 0 1em 0;
+		padding: 0.5em 0 0.5em .5em;
 	}
 
 	code {
@@ -3156,7 +3156,7 @@ h1{border-bottom:5px solid #00BB64;}
 		@media screen and (max-width: 980px) {
 
 			.wrapper {
-				padding: 4em 3em 2em 3em ;
+				padding: .5em 0em 3em .5em ;
 			}
 
 		}
@@ -3164,7 +3164,7 @@ h1{border-bottom:5px solid #00BB64;}
 		@media screen and (max-width: 736px) {
 
 			.wrapper {
-				padding: 3em 2em 1em 2em ;
+				padding: 3em 2em 1em 1em ;
 			}
 
 		}
