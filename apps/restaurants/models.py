@@ -74,32 +74,40 @@ class Dish_type(Model):
 	name = CharField(max_length=30, default="dish type name")
 	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"), ('B', "Both"),('D', 'Drinks'), ('H', "Hard Drinks"),)
 	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
-	about = CharField(max_length=400, blank=True, null=True)	
+	commonPrice = BooleanField(default=False)
 	def __unicode__(self):
 		return self.name
-	def about_as_list(self):
-		return self.about.split(',')
 	class Meta:
 		ordering = ('name',)
 
+class Dish_type_pricee(Model):
+	priceOf = ForeignKey(Dish_type, null=True, blank=True)
+	name = CharField(max_length=50, blank=True, null=True)
+	price = IntegerField(default=0)
+	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"), ('B', "Both"),('D', 'Drinks'), ('H', "Hard Drinks"),)
+	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
+	def __unicode__(self):
+		return self.name
+
 class Dish(Model):
+	
 	dish_type = ForeignKey(Dish_type)
 	name = CharField(max_length=50, default="dish name", blank=True, null=True)
 	about = CharField(max_length=100, blank=True)
 	userUpVotes = ManyToManyField(Profile, blank=True, related_name='likes')
 	userDownVotes = ManyToManyField(Profile, blank=True, related_name='dislike')
-	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"),('B', "Both Veg and Non Veg"),('D', "Drink"),)
-	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
 	def __unicode__(self):
 		return self.name
 	class Meta:
 		ordering = ('name',)
 
 
-class Dish_price_type(Model):
-	dish = ForeignKey(Dish)
+class Dish_price(Model):
+	dish = ForeignKey(Dish, null=True, blank=True)
 	qty = CharField(max_length=50, blank=True)
-	price = IntegerField(default=0)
+	price = IntegerField(default=0, blank=True)
+	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"),('B', "Both Veg and Non Veg"),('D', "Drink"),)
+	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
 	def __unicode__(self):
 		return self.qty
 

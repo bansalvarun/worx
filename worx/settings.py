@@ -106,7 +106,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'worx',
+        'NAME': 'myworx',
         'USER': 'varun',
         'PASSWORD': 'lenovo',
         'HOST': 'localhost',

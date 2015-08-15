@@ -9,6 +9,7 @@
 	<nav id= "nav" style="left:22px; top:13px">
 		<a href="/"><h4>WORX.</h4></a>
 	</nav>
+
 {% endblock %}
 
 
@@ -19,86 +20,224 @@
     {% for dishtype in restaurant.dish_type_set.all %}  
       <li><a href="#{{dishtype}}" >{{dishtype}}</a></li>
     {% endfor %}
-    <li><a href="#myModal" data-toggle="modal">Cart</a></li>
+    <li><a href="#myModal" data-toggle="modal">Cart &#x20B9 <span class="finalPay">0</span></a></li>
 {% endblock %}
 
 
 {% block content %}
-			<body>
-				<!-- Main -->
-					<article id="digimenu">
-						<header>
-							<h2>{{restaurant}}, {{restaurant.locality}}</h2>
-							<h3>{{restaurant.about}}</h3>
-							<p>Phone:&nbsp&nbsp{{restaurant.phone}}</p>
-						</header>
-						<section class="wrapper style5">
-							<div class="inner">
+<!-- Main -->
+<body>
+<article id="digimenu">
+	<header>
+		<h2>{{restaurant}}, {{restaurant.locality}}</h2>
+		<h3>{{restaurant.about}}</h3>
+		<p>Phone:&nbsp&nbsp{{restaurant.phone}}</p>
+	</header>
+<section class="wrapper style5">
+<div class="inner">
+<h3>Menu</h3>
+<hr/>
 
-								<h3>Menu</h3>
-								<hr />
 <!--  -->
-	{% for dishtype in restaurant.dish_type_set.all %}
-	    <section id="{{dishtype}}"></section>  
-
-		<h4>{{dishtype}}</h4>
-		<blockquote>
+{% for dishtype in restaurant.dish_type_set.all %}
+	<section id="{{dishtype}}"></section>  
+	<h4>{{dishtype}}</h4>
+	<blockquote>
 		<ul class="alt">
-			{% if dishtype.about %}
-			<li><h3><span style="background-color:#f6f6f6; color:black" >|
-			{% for about in dishtype.about_as_list %}
-				{{about}} | 
-			{% endfor %}
-			</span></h2></li>
-			{% endif %}
-
-		{% for dish in dishtype.dish_set.all %}
-			  
-				<li><div class="row"><h4>
-				{{dish}}
-				</h4></div>
-				<blockquote>
-
-				<table class="table table-condensed" style="border:0px">
-				<tbody>
-				{% for price_type in dish.dish_price_type_set.all %}
-				<tr>
-					<td ><h4>
-						{% if dish.vegOrNot == 'V' %}
-							<span style="color:green;padding:0 .5em">&#8865;</span>
-						{% elif dish.vegOrNot == 'N' %}
-							<span style="color:red;padding:0 .5em">&#8865;</span>
+			{% if dishtype.commonPrice == True %}
+				<li align="justify">
+					<h4>|
+					{% for price in dishtype.dish_type_pricee_set.all %}
+						<span style="width:200px;">
+						{% if price.vegOrNot == 'V' %}
+							<span style="color:green;padding:0 .5em">&#9679;</span>
+						{% elif price.vegOrNot == 'N' %}
+							<span style="color:red;padding:0 .5em">&#9679;</span>
 						{% endif %}
-					{{price_type}}  
+						{{price.name}} &#8377;{{price.price}} |
+						</span>
+					{% endfor %}
 					</h4>
-					<h5></h5></td>
-					<td style="float:right; width:40px; margin-right:5px; ">
-						<h4>&#8377;{{price_type.price}}</h4>
-					</td>
-					<td style="float:right; padding-right:0px; width:80px; "> 
-						<div class="btn-danger btn-group btn-group-xs " role="group" aria-label="...">
-						  <button type="button" class="btn btn-default" style="height:25px"><span class="glyphicon glyphicon-menu-up"></span></button>
-						  <button type="button" class="btn btn-default" style="height:25px">0</button>
-						  <button type="button" class="btn btn-default" style="height:25px"><span class="glyphicon glyphicon-menu-down"></span></button>
-						</div>
-					</td>
-
-				</tr>
-				{% endfor %}
-				</tbody></table>
-
-				</blockquote>
-
 				</li>
-		{% endfor %}
-
-		</ul>
-		</blockquote>
-
-	{% endfor %}		
-
-
+			{% endif %}
+			{% for dish in dishtype.dish_set.all %}
+				<li>
+					<div class="row myRow" >
+						<span style="cursor:s-resize" onclick="expand('ROW{{dish}}');">
+							<h4 style="padding-top:5px; padding-bottom:20px" >
+							{{dish}}
+							</h4>
+						</span>
+						<div style="position: absolute;right: 0; margin-top:20px">
+							<div class="material-icons mdl-badge"  data-badge="0" style="color:blue" >
+								<span class="glyphicon glyphicon-thumbs-up" style="font-size:25px"></span>
 							</div>
-						</section>
-					</article>
+
+							<div class="material-icons mdl-badge" data-badge="0" style="color:black">
+								<span class="glyphicon glyphicon-thumbs-down" style="font-size:25px"></span>
+							</div>
+						</div>
+					</div>
+					<div id="ROW{{dish}}" style="display: none;">
+						<blockquote >
+							<table class="table table-condensed" style="border:0px">
+								<tbody>
+									{% for price_type in dish.dish_price_set.all %}
+										<tr>
+											<td ><h4>
+												{% if price_type.vegOrNot == 'V' %}
+												<span style="color:green;padding:0 .5em">&#9679;</span>
+												{% elif price_type.vegOrNot == 'N' %}
+												<span style="color:red;padding:0 .5em">&#9679;</span>
+												{% endif %}
+												{{price_type}}  
+												</h4>
+											</td>
+											<td style="float:right; width:40px; margin-right:5px; ">
+												<h4>&#8377;{{price_type.price}}</h4>
+											</td>
+											<td id='dish{{price_type.id}}' style="float:right; padding-right:0px; width:85px;" > 
+												<div class="btn-default btn-group btn-group-xs " role="group" aria-label="...">
+													<button type="button" class="btn btn-default" onclick="addItem(
+														'qty{{price_type.id}}',
+														'{{dish}}',
+														'{{price_type.vegOrNot}}',
+														'{{price_type}}',
+														'dish{{price_type.id}}',
+														'{{price_type.price}}',
+														'varun{{price_type.id}}'
+													)" style="height:25px">
+														<span class="glyphicon glyphicon-plus"></span>
+													</button>
+													
+													<span class="btn " style="height:25px;" ><span class="qty{{price_type.id}}">0</span></span>
+													
+													<button type="button" class="btn btn-default" onclick="delItem(
+														'qty{{price_type.id}}',
+														'{{dish}}',
+														'{{price_type.vegOrNot}}',
+														'{{price_type}}',
+														'dish{{price_type.id}}',
+														'{{price_type.price}}',
+														'varun{{price_type.id}}'
+													)" style="height:25px">
+													<span class="glyphicon glyphicon-minus"></span>
+													</button>
+												</div>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</blockquote>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</blockquote>
+{% endfor %}
+		<div style="margin-bottom:50px">		
+      <button type="button" class="btn btn-info btn-lg" style="float:right; right:0" data-toggle="modal" data-target="#myModal">
+        Bill &#x20B9 <span class="finalPay">0</span>
+      </button>
+      </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top:100px">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <span type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></span> -->
+          <h5 class="modal-title" id="myModalLabel">Your Order</h5>
+        </div>
+        <div class="modal-body" style="font-size:10px">
+        	
+			<table class="table table-condensed col-md-4" id="mycart">
+
+			</table>
+			<hr><hr>
+	        	<p style="font-size:10px;line-height: 0.2;">
+	        		Total <span style="float:right; padding-right:0">&#x20B9 <span class="total">0</span></span>
+	        	</p>
+	        	<p style="font-size:10px;line-height: 0.2;">
+	        	Service Charge <span style="float:right; padding-right:0">&#x20B9 <span class="servCharge">0</span></span><br/>
+	        	</p>
+	        	<p style="font-size:10px;line-height: 0.2;margin-bottom:0px">
+	        	Service Tax <span style="float:right; padding-right:0">&#x20B9 <span class="servTax">0</span></span><br/>
+	        	</p>
+	        	<hr>
+	        	<p style="font-size:10px;line-height: 0.2;margin-bottom:0px">
+	        	Final<span style="float:right; padding-right:0">&#x20B9 <span class="finalPay">0</span></span>
+        	 	</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info btn-xs" onclick="window.location.reload()" >Reset</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+</div>
+</section>
+</article>
+
+<script type="text/javascript">
+	mylistPriceType = [];
+	// var itemQty;
+	function addItem (qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId) {
+		itemQty = document.getElementsByClassName(String(qtyID))[0].innerHTML;
+		document.getElementsByClassName(String(qtyID))[0].innerHTML = String(1 + Number(itemQty));
+		var table = document.getElementById("mycart");
+		var index;
+		var n = mylistPriceType.length;
+		for(index = 0; index<n; index++){
+			console.log(mylistPriceType[index] == String(priceTypeId));
+			if(mylistPriceType[index] == String(priceTypeId)){
+				var cell = document.getElementById(String(priceTypeId));
+				// var cell = row.insertCell(3);
+				cell.innerHTML = document.getElementById(String(tdClass)).innerHTML;	
+				return;
+			}
+		}
+		mylistPriceType.push(String(priceTypeId));
+		var row = table.insertRow(0);
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+		var cell4 = row.insertCell(3);
+		cell3.id = priceTypeId;
+		cell1.innerHTML = String(dishName);
+		var sym = "";
+		if(vOn=='V')
+			sym = String("<span style='color:green;padding:0 .5em'>&#9679;</span>");
+		else if(vOn=='N')
+			sym = String("<span style='color:red;padding:0 .5em'>&#9679;</span>");
+		cell2.innerHTML = sym + String(priceType);
+		cell3.innerHTML = document.getElementById(String(tdClass)).innerHTML;
+		cell4.innerHTML = "&#8377;" + String(price);
+	}
+	function delItem(qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId){
+		itemQty = document.getElementsByClassName(String(qtyID))[0].innerHTML;
+		if(Number(itemQty) > 0){
+			document.getElementsByClassName(String(qtyID))[0].innerHTML = String(Number(itemQty)-1);	
+		}
+		var index;
+		var n = mylistPriceType.length;
+
+		for(index = 0; index<n; index++){
+			if(mylistPriceType[index] == String(priceTypeId)){
+				var cell = document.getElementById(String(priceTypeId));
+				cell.innerHTML = document.getElementById(String(tdClass)).innerHTML;	
+				return;
+			}
+		}
+	}
+</script>
+
+<script src="{%static "js/menu.js" %}"></script>
+</body>
+
 {% endblock %}

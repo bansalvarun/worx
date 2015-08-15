@@ -31,10 +31,12 @@ def restaurants(request):
 
 def menu(request, url):
 	restaurant = get_object_or_404(Restaurant, pk=url)
-	dish_price_type_ob = Dish_price_type.objects.all()
+	dish_type_ob = Dish_type.objects.filter(restaurant = restaurant)
 	args = {}
 	args['restaurant'] = restaurant
-	args['dish_price_type_ob'] = dish_price_type_ob;
+	args['dish_type_ob'] = dish_type_ob
+	args['dishes'] = Dish.objects.all()
+	args['dish_price_type_ob'] = Dish_price.objects.all()
 	return render(request, 'restaurants/menu.html', args)
 
 def cuisines(request):

@@ -2,7 +2,7 @@ body{
     color: #888888;
     font-family: 'Bree Serif',serif;
     font-size: 16px;
-    min-height: 2000px;
+    /*min-height: 2000px;*/
 }
 
 .login_modal_footer{margin-top:5px;}

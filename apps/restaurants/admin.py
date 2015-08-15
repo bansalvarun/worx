@@ -9,8 +9,8 @@ admin.site.register(Establishment)
 admin.site.register(Locality)
 
 
-class DishPriceTypeInLine(NestedTabularInline):
-	model = Dish_price_type
+class DishPriceInLine(NestedTabularInline):
+	model = Dish_price
 	extra = 0
 	fk_name = 'dish'
 
@@ -19,13 +19,19 @@ class DishInline(NestedStackedInline):
 	exclude = ('userUpVotes','userDownVotes', )
 	extra = 1
 	fk_name = 'dish_type'
-	inlines = [DishPriceTypeInLine]
+	inlines = [DishPriceInLine]
+
+class DishTypePriceInLine(NestedTabularInline):
+	model = Dish_type_pricee
+	extra = 1
+	fk_name = 'priceOf'
+
 
 class DishTypeInline(NestedStackedInline):
 	model = Dish_type
 	extra = 1
 	fk_name = 'restaurant'
-	inlines = [DishInline]
+	inlines = [DishTypePriceInLine, DishInline]
 
 class RestaurantAdmin(NestedModelAdmin):
 	model = Restaurant
