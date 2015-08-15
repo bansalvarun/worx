@@ -73,9 +73,12 @@ class Dish_type(Model):
 	restaurant = ForeignKey(Restaurant)
 	name = CharField(max_length=30, default="dish type name")
 	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"), ('B', "Both"),('D', 'Drinks'), ('H', "Hard Drinks"),)
-	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")	
+	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
+	about = CharField(max_length=400, blank=True)	
 	def __unicode__(self):
 		return self.name
+	def about_as_list(self):
+		return self.about.split(',')
 	class Meta:
 		ordering = ('name',)
 

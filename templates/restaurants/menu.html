@@ -44,8 +44,10 @@
 		<h4>{{dishtype}}</h4>
 		<blockquote>
 		<ul class="alt">
+			{% for about in dishtype.about_as_list %}
+				<li>{{about}}</li>
+			{% endfor %}
 		{% for dish in dishtype.dish_set.all %}  
-
 			<li><div class="row"><h4>{{dish}}</h4></div>
 			<blockquote>
 
