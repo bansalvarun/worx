@@ -32,7 +32,7 @@ class Profile(Model):
 
 def upload_file_name(instance, filename):
 	return "uploads/%s_%s" % (str(time()).replace('.','_'), filename)
-class Cusine(Model):
+class Cuisine(Model):
 	name = CharField(max_length=30)
 	image = ImageField(upload_to="upload_file_name", blank=True, null="True")
 	def __unicode__(self):
@@ -57,7 +57,7 @@ class Restaurant(Model):
 	phone = CharField(max_length=13, blank=True)
 	url = CharField(max_length=30, unique=True, default="restaurant_name_area_no_space", blank=True)
 	image = ImageField(upload_to=upload_file_name, blank=True, null=True)
-	cusines = ManyToManyField(Cusine, blank=True)
+	cuisines = ManyToManyField(Cuisine, blank=True)
 	establishment = ManyToManyField(Establishment, blank=True)
 	service_charge = IntegerField(blank=True, null=True)
 	service_tax = IntegerField(blank=True,null=True)

@@ -4,7 +4,7 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Cusine)
+admin.site.register(Cuisine)
 admin.site.register(Establishment)
 admin.site.register(Locality)
 
@@ -29,6 +29,6 @@ class DishTypeInline(NestedStackedInline):
 
 class RestaurantAdmin(NestedModelAdmin):
 	model = Restaurant
-	filter_horizontal = ('cusines','establishment',)
+	filter_horizontal = ('cuisines','establishment',)
 	inlines = [DishTypeInline]
 admin.site.register(Restaurant, RestaurantAdmin)

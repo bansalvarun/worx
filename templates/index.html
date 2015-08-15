@@ -2,126 +2,66 @@
 {% load staticfiles %}
 
 {% block nav %}
-   <li><a href="/restaurants/">Restaurants</a></li>
-   <li><a href="#">Events</a></li>
-   <li><a class="smoothscroll" href="/#team">Team</a></li>
-   <li><a class="smoothscroll" href="/#contact">Contact Us</a></li>
+	<li><a href="/events/">Events</a></li>
+	<li><a href="/restaurants/">Restaurants</a></li>
 {% endblock %}
 
 
+
 {% block content %}
-   <!-- Homepage 
-   ================================================== -->
-   <header id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-        </ol>
+		<body class="landing">
 
-        <!-- Wrapper for Slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('{%static "img/slide2.jpg" %}');"></div>
-                <div class="carousel-caption">
-                    <h2></h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('{%static "img/slide1.jpg" %}');"></div>
-                <div class="carousel-caption">
-                    <h2></h2>
-                </div>
-            </div>
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<h2>WORX.</h2>
+							<p>revolutionising the way you dine</p>
+							<ul class="actions">
+								<li><a href="#" class="button special">Sign In</a></li>
+							</ul>
+						</div>
+						<a href="#one" class="more scrolly">Learn More</a>
+					</section>
 
-        </div>
+				<!-- One -->
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Digital Menu: <br />One platform for all types of Restaurants</h2>
+								<p>Check out menu of Restaurants, Food Joints, Bar, Lounges on your mobile just by tapping Restaurant table.</p>
+							</header>
+							<ul class="icons major">
+								<li><span class="icon fa-mobile major style1"><span class="label"></span></span></li>
+								<li><span class="icon fa-cutlery major style2"><span class="label"></span></span></li>
+								<li><span class="icon fa-glass major style3"><span class="label"></span></span></li>
+							</ul>
+						</div>
+					</section>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
+				<!-- Two -->
 
-    </header>
+					<section id="two" class="wrapper alt style2">
+						<section class="spotlight">
+							<div class="image"><img src="{%static "img/mobile.png" %}" alt="" /></div><div class="content">
+								<h2>A smartphone enabled with<br />
+								NFC and internet</h2>
+								<p></p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="{%static "img/nfc.jpg" %}" alt="" /></div><div class="content">
+								<h2>Tap on the NFC menu<br />
+								present on the Table</h2>
+								<p></p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="{%static "img/menu.jpg" %}" alt="" /></div><div class="content">
+								<h2>Order the food you wish<br />
+								from the digi menu</h2>
+								<p></p>
+							</div>
+						</section>
+					</section>
 
-   <a  name="services"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Digital Menu:<br>One platform for all types of Restaurants</h2>
-                    <p class="lead">Check out menu of Restaurants, Food Joints, Bar, Loungs on your mobile just by tapping Restaurant table</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="{%static "img/ipad.png" %}" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-a -->
-
-    <div class="content-section-b">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Events<br></h2>
-                    <p class="lead">Make it easy for your audience to register by just a simple tap of their smartphones. Share and promote your artists and their performances in a new and unique manner.
-                    </p>
-                </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="{%static "img/dog.png" %}" alt="">
-                </div>
-            </div>
-
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-b -->
-<a  name="contact"></a>
-
-    <div class="banner">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2>Contact Us:</h2>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-inline banner-social-buttons">
-                        <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-default btn-lg"> <i class="fa fa-facebook fa-fw"></i><span class="network-name">Facebook</span></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-default btn-lg"> <i class="fa fa-google fa-fw"></i><span class="network-name">Gmail</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.banner -->
-  
 {% endblock %}

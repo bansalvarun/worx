@@ -1,0 +1,85 @@
+
+{% extends "./base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+| Restaurants
+{% endblock %}
+
+
+{% block nav %}
+	<li><a href="/restaurants/">Restaurants</a></li>
+    <li><a href="/restaurants/Cuisines/">Cuisines</a></li>
+    <li><a href="/restaurants/localities/">Localities</a></li>
+    <li><a href="/restaurants/establishments/">Establishments</a></li>
+{% endblock %}
+
+
+{% block content %}
+  <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Restaurants</h1>
+                        <h3>Delhi, NCR, Punjab</h3>
+                        
+                        <!-- <hr class="intro-divider"> -->
+                        
+                        <form class="form-inline"  action="/restaurants/search/" method="get" >
+                          <div class="form-group">
+                            <input type="text" name="q" class="form-control" id="" placeholder="Name, Locality">
+                          </div>
+                           <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                        
+
+                    </div>
+<!--                          -->
+                    </div>
+            </div>
+
+        </div>
+        </div>
+<div class="container">
+  <h4 align="justify">
+    <br>Replacing old and generic paper menus with new digital menus with many other services incorporated into one. Revolutionizing the way we order our food.
+  </h4>
+  <div class="page-header">
+    {% if restaurants %}
+      {% for restaurant in restaurants %}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <a href="/restaurants/{{restaurant.id}}/menu">{{restaurant.name}}, &nbsp{{restaurant.locality}}</a>
+            <p style="float:right">Rating</p>
+          </div>
+          <div class="panel-footer">
+            {{restaurant.about}}<br>
+            Cuisines Available:&nbsp
+            {% for cusine in restaurant.Cuisines.all %}
+              {{cusine}},
+            {% endfor %}
+            <br>
+            Establishment:&nbsp
+            {% for estab in restaurant.establishment.all %}
+              {{estab}}
+            {% endfor %}
+          </div>
+        </div>
+
+      {% endfor %}
+    {% else %}
+      <p>No restaurants are available currently.<br><a href="/">Go Home.</a></p>
+    {% endif %}
+  </div>
+</div>
+
+
+
+      
+
+
+
+{% endblock %}

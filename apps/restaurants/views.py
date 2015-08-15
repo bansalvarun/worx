@@ -35,13 +35,13 @@ def menu(request, url):
 	args = {}
 	args['restaurant'] = restaurant
 	args['dish_price_type_ob'] = dish_price_type_ob;
-	return render(request, 'restaurants/menu2.html', args)
+	return render(request, 'restaurants/menu.html', args)
 
-def cusines(request):
-	cusines = Cusine.objects.all()
+def cuisines(request):
+	cuisines = Cuisine.objects.all()
 	args = {}
-	args['cusines'] = cusines
-	return render(request, 'restaurants/cusines.html', args)
+	args['cuisines'] = cuisines
+	return render(request, 'restaurants/cuisines.html', args)
 
 def localities(request):
 	localities = Locality.objects.all()
