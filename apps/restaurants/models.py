@@ -74,7 +74,7 @@ class Dish_type(Model):
 	name = CharField(max_length=30, default="dish type name")
 	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"), ('B', "Both"),('D', 'Drinks'), ('H', "Hard Drinks"),)
 	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
-	about = CharField(max_length=400, blank=True)	
+	about = CharField(max_length=400, blank=True, null=True)	
 	def __unicode__(self):
 		return self.name
 	def about_as_list(self):
@@ -84,7 +84,7 @@ class Dish_type(Model):
 
 class Dish(Model):
 	dish_type = ForeignKey(Dish_type)
-	name = CharField(max_length=50, default="dish name")
+	name = CharField(max_length=50, default="dish name", blank=True, null=True)
 	about = CharField(max_length=100, blank=True)
 	userUpVotes = ManyToManyField(Profile, blank=True, related_name='likes')
 	userDownVotes = ManyToManyField(Profile, blank=True, related_name='dislike')
