@@ -44,7 +44,7 @@
 		<h4>{{dishtype}}</h4>
 		<blockquote>
 		<ul class="alt">
-			{% if dishtype.about_as_list %}
+			{% if dishtype.about %}
 			<li><h3><span style="background-color:#f6f6f6; color:black" >|
 			{% for about in dishtype.about_as_list %}
 				{{about}} | 
@@ -75,7 +75,7 @@
 					<td style="float:right; width:40px; margin-right:5px; ">
 						<h4>&#8377;{{price_type.price}}</h4>
 					</td>
-					<td style="float:right; padding-right:0px; width:80px " > 
+					<td style="float:right; padding-right:0px; width:80px; "> 
 						<div class="btn-danger btn-group btn-group-xs " role="group" aria-label="...">
 						  <button type="button" class="btn btn-default" style="height:25px"><span class="glyphicon glyphicon-menu-up"></span></button>
 						  <button type="button" class="btn btn-default" style="height:25px">0</button>
