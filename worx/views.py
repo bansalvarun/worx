@@ -17,4 +17,4 @@ def home(request):
 
 def loaderVerify(request):
 	content = "loaderio-478d2141c8b3b653e6190dcff0b4518c"
-	return HttpResponse(content, content_type='text/plain; charset=utf8')
+	return HttpResponse(content, content_type='text/plain')
