@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from apps.restaurants.models import *
+from django.http import HttpResponse
 
 def home(request):
 	args = {}
@@ -14,4 +15,6 @@ def home(request):
 
 	return render(request, 'index.html', args)	
 
-
+def loaderVerify(request):
+	content = "loaderio-478d2141c8b3b653e6190dcff0b4518c"
+	return HttpResponse(content, content_type='text/plain; charset=utf8')
