@@ -7,8 +7,9 @@
 
 
 {% block navcart %}
-	
-	<li>	<a data-toggle="modal" href="#myModal"><h5>Bill &#x20B9<span class="finalPay">0</span></h5></a></li>
+	<li ><a data-toggle="modal" href="#myModal"><h4> 
+		<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+	&#x20B9<span class="finalPay">0</span></h4></a></li>
 {% endblock %}
 
 {% block nav2 %}
@@ -43,9 +44,6 @@
 <div class="inner">
 <h3>Menu</h3>
 <hr/>
-	    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="position:fixed; right:50px">
-	    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-	    </button>
 
 <!--  -->
 {% for dishtype in restaurant.dish_type_set.all %}
