@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load socialaccount %}
-
+ {% load account %}
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -64,23 +64,36 @@
       			<div class="clearfix"></div>
       			<div id='social-icons-conatainer'>
 	        		<div class='modal-body-left'>
+
+<form class="login" method="POST" action="/accounts/login/" >{% csrf_token %}
+	<input type='hidden' name='csrfmiddlewaretoken' value='{{csrf_token}}'>
+	<input placeholder="Username" autofocus="autofocus" id="id_login" maxlength="30" name="login" class="form-inline" type="text" style="height:40px;margin-bottom:10px" >
+	<input id="id_password" name="password" placeholder="Password" type="password" style="height:40px;margin-bottom:10px">
+	<button  class="btn btn-success modal-login-btn" type="submit" style="height:40px;">Sign In</button>
+	<a href="/accounts/password/reset/" style="float:right; right:0px; margin:10px 0; color:black;font-size:10px">Forgot Password?</a>
+ <input type="hidden" name="next" value="{{request.path}}" />
+</form>
+
+<!-- 	        		
+	                <form action="/accounts/" method="post">{% csrf_token %}
 	        			<div class="form-group">
-		              		<input type="text" id="username" placeholder="Enter your name" value="" class="form-control login-field">
+		              		<input type="text" id="id_login" placeholder="Enter your name"  class="form-control login-field">
 		              		<i class="fa fa-user login-field-icon"></i>
 		            	</div>
 
 		            	<div class="form-group">
-		            	  	<input type="password" id="login-pass" placeholder="Password" value="" class="form-control login-field">
+		            	  	<input type="password" id="id_password" placeholder="Password" class="form-control login-field">
 		              		<i class="fa fa-lock login-field-icon"></i>
 		            	</div>
-
-		            	<a href="#" class="btn btn-success modal-login-btn">Login</a>
-		            	<a href="#" class="login-link text-center">Lost your password?</a>
+                        <a class="btn btn-success modal-login-btn " ><input class="modal-login-btn" type="submit" id="submit" method="submit" value="Log In"></a>
+	               </form>
+ -->
+		            	<!-- <a href="#" class="login-link text-center">Lost your password?</a> -->
 	        		</div>
 
 	        		<div class='modal-body-right'>
 	        			<div class="modal-social-icons">
-	        				<a href='#' class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
+	        				<a class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
 	        				<a href='#' class="btn btn-default google"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
 	        			</div> 
 	        		</div>	

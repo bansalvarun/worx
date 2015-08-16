@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% block nav2 %}
+	<nav id= "nav" style="left:22px; top:5px">
+		<a href="/"><h2>worx.</h2></a>
+	</nav>
+{% endblock %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<body>
+	<article id="main">
+		<section class="wrapper style5">
+			<div class="inner">
+				<form class="form-signin" method="POST" action="{% url 'account_login' %}" style="float:center;">
+				<h2 style="float:center;text-align:center">{% trans "Sign In " %}</h2>
+				{% get_providers as socialaccount_providers %}
+				{% if socialaccount_providers %}
+<!-- 					<p>{% blocktrans with site.name as site_name %}Please sign in with one of your existing accounts for {{ site_name }} account: {% endblocktrans %}</p>
+ -->					<div style="float:center;text-align:center">
+	        				<a class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
+	        				<a href='#' class="btn btn-default google"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
+					</div>
+					<!-- {% include "socialaccount/snippets/login_extra.html" %} -->
+				{% else %}
+					<p>{% blocktrans %}If you have not created an account yet, then please
+					<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+				{% endif %}
+				  <!-- <hr> -->
+				  
+				  <div style="text-align:center; margin:20px 0px 5px 0px">
+				  	<a href="{{ signup_url }}" >Register @worx.co.in</a>
+				  </div>
+				  <div style="float:center;text-align:center"><b>{% trans 'OR' %}<br/><br/></div>
+				  <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
+				  <p><input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Username" type="text"></p>
+				  <p><input id="id_password" name="password" placeholder="Password" type="password"></p>
+				  {% if redirect_field_value %}
+				  	<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+				  {% endif %}
+				  <button class="btn btn-default btn-large" type="submit" style="float:left;">{% trans "Sign In" %}</button>
+				  <a href="{% url 'account_reset_password' %}" style="float:right; right:0px;font-size:15px;">{% trans "Forgot Password?" %}</a><br/>
+				</form>
+
+			</div>
+		</section>
+	</article>
+</body>	
+<style type="text/css">
+
+.wrapper {    
+	/*margin-top: 80px;*/
+	/*margin-bottom: 20px;*/
+	padding-top: 50px;
+}
+
+.facebook, .facebook:hover {
+
+    /*background-color: #fff;*/
+    /*border: 2px solid #fff;*/
+    /*color: #000;*/
+}
+
+.form-signin {
+  max-width: 420px;
+  padding: 0px 38px 66px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 0px dotted rgba(0,0,0,0.1);  
+  }
+
+.form-signin-heading {
+  text-align:center;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 0px;
+  /*border-bottom-left-radius: 0;*/
+  /*border-bottom-right-radius: 0;*/
+  border-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 0px;
+  border-radius: 0;
+  /*border-top-left-radius: 0;*/
+  /*border-top-right-radius: 0;*/
+}
+
+</style>
+
+{% endblock %}
