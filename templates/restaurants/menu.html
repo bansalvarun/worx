@@ -5,6 +5,15 @@
 | Restaurants
 {% endblock %}
 
+
+{% block navcart %}
+	<nav id= "nav" style="right:200px; top:17px">
+		<a  data-toggle="modal" data-target="#myModal"><h5>Bill &#x20B9<span class="finalPay">0</span></h5></a>
+	</nav>
+
+
+{% endblock %}
+
 {% block nav2 %}
 	<nav id= "nav" style="left:22px; top:13px">
 		<a href="/"><h4>WORX.</h4></a>
@@ -37,6 +46,9 @@
 <div class="inner">
 <h3>Menu</h3>
 <hr/>
+	    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="position:fixed; right:50px">
+	    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+	    </button>
 
 <!--  -->
 {% for dishtype in restaurant.dish_type_set.all %}
@@ -136,8 +148,8 @@
 		</ul>
 	</blockquote>
 {% endfor %}
-		<div style="margin-bottom:50px">		
-      <button type="button" class="btn btn-info btn-lg" style="float:right; right:0" data-toggle="modal" data-target="#myModal">
+		<div style="margin-bottom:50px;">		
+      <button type="button" class="btn btn-info btn-xs" style="float:right; right:0; " data-toggle="modal" data-target="#myModal">
         Bill &#x20B9 <span class="finalPay">0</span>
       </button>
       </div>
