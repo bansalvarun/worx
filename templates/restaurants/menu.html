@@ -62,8 +62,8 @@
 			{% endif %}
 			{% for dish in dishtype.dish_set.all %}
 				<li>
-					<div class="row myRow" >
-						<span style="cursor:s-resize" onclick="expand('ROW{{dish}}');">
+					<div class="row myRow" onclick="expand('ROW{{dish}}')" title="tap to place order">
+						<span style="cursor:s-resize" >
 							<h4 style="padding-top:5px; padding-bottom:20px" >
 							{{dish}}
 							</h4>

@@ -27,8 +27,7 @@ SECRET_KEY = '$)p&gq(5_5d_@q^mo@^2ebk_r9!@j6qx=^^vsb&*(6$$&8!^gc'
 
 DEBUG = True
 TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['127.0.0.1:8000']
 
 
 # Application definition
@@ -50,6 +49,7 @@ INSTALLED_APPS = (
 
 
     'apps.restaurants',
+    
     # 'apps.people',
 )
 

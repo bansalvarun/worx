@@ -83,14 +83,14 @@ class Dish_type(Model):
 class Dish_type_pricee(Model):
 	priceOf = ForeignKey(Dish_type, null=True, blank=True)
 	name = CharField(max_length=50, blank=True, null=True)
-	price = IntegerField(default=0)
+	price = IntegerField(default=0, blank=True, null=True)
 	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"), ('B', "Both"),('D', 'Drinks'), ('H', "Hard Drinks"),)
 	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
 	def __unicode__(self):
 		return self.name
 
 class Dish(Model):
-	
+
 	dish_type = ForeignKey(Dish_type)
 	name = CharField(max_length=50, default="dish name", blank=True, null=True)
 	about = CharField(max_length=100, blank=True)
