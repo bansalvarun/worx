@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^restaurants/', include('apps.restaurants.urls')),
-    url(r'^$', home),
     url(r'^loaderio-478d2141c8b3b653e6190dcff0b4518c/', loaderVerify),
+    url(r'^$', home),
 ]
