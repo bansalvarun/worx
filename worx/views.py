@@ -6,6 +6,9 @@ from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 import datetime
 
+def error404(request):
+    return render(request,'404.html', status=404)
+
 def home(request):
 	args = {}
 	# restaurants = Restaurant.objects.all()[:5]

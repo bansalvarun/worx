@@ -26,8 +26,8 @@ SECRET_KEY = '$)p&gq(5_5d_@q^mo@^2ebk_r9!@j6qx=^^vsb&*(6$$&8!^gc'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = True
-TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1:8000']
+ALLOWED_HOSTS = ['*']
+TEMPLATE_DEBUG = DEBUG
 
 
 # Application definition
@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    # 'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
 
 
     'apps.restaurants',
@@ -134,13 +134,13 @@ USE_TZ = True
 
 # STATIC_URL = '/static/'
 STATIC_URL = '/staticfiles/'
-# STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = '/staticfiles/'
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, "staticfiles"),
 )
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -3,6 +3,7 @@ from apps.restaurants.models import *
 from django.http import HttpResponse
 # Create your views here.
 
+
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         args = {}
@@ -57,7 +58,6 @@ def establishments(request):
 	args['establishments'] = establishments
 	return render(request, 'restaurants/establishments.html', args)
 
-
 def vote(request):
    dish_id = int(request.POST.get('id'))
    vote_type = request.POST.get('type')
@@ -90,3 +90,4 @@ def vote(request):
    num_votes = Dish.userUpVotes.count() - Dish.userDownVotes.count()
 
    return HttpResponse(num_votes)
+
