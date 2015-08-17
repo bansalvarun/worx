@@ -3,6 +3,7 @@ import datetime
 from django.db.models import * 
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 from allauth.account.models import EmailAddress
 from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
@@ -30,6 +31,10 @@ class Profile(Model):
 	# 		user.save()
 	def __unicode__(self):
 		return self.user.first_name
+	def save(self, user):
+		g = Group.objects.get(name=Public)
+		user.groups.add(g)
+		user.save()
 
 def upload_file_name(instance, filename):
 	return "uploads/%s_%s" % (str(time()).replace('.','_'), filename)
