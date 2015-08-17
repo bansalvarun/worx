@@ -68,7 +68,20 @@
 <!--  -->
 {% for dishtype in restaurant.dish_type_set.all %}
 	<section id="{{dishtype}}" style="top:-100px;position: relative; visibility: hidden;"></section>  
-	<h4>{{dishtype}}</h4>
+	<h4>
+		{% if dishtype.vegOrNot == 'V' %}
+		<span style="color:green;padding:0">&#9679;</span>
+		{% elif dishtype.vegOrNot == 'N' %}
+		<span style="color:red;padding:0">&#9679;</span>
+		{% elif dishtype.vegOrNot == 'B' %}
+		<span style="color:green;padding:0">&#9679;</span>
+		<span style="color:red;padding:0">&#9679;</span>
+		{% elif dishtype.vegOrNot == 'D' %}
+		<span class="glyphicon glyphicon-glass" style="color:#1E90FF"></span>
+		{% elif dishtype.vegOrNot == 'H' %}
+		<span class="glyphicon glyphicon-glass" style="color:#ff3a3a"></span>
+		{% endif %}
+	{{dishtype}}</h4>
 	<blockquote>
 		<ul class="alt">
 			{% if dishtype.commonPrice == True %}
