@@ -27,30 +27,7 @@
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
-
 								<h3>Restaurants</h3>
-<!-- <div>
-
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">City</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Locality</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Cuisines</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Establishments</a></li>
-	<li role="presentation" class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-			Dropdown <span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			<li>blah</li>
-			<li>ha</li>
-		</ul>
-	</li>
-  </ul>
-</div>
-<br />
- -->
-
-
 							    {% if restaurants %}
 							      {% for restaurant in restaurants %}
 									<div class="row"><h4><a href="/restaurants/{{restaurant.id}}/menu">{{restaurant.name}}, {{restaurant.locality}}</a></h4>
@@ -58,7 +35,7 @@
 										<img src="{{restaurant.image}}" alt="" height= "10%" width="10%"/>
 									{% endif %}
 									</div>
-										<blockquote>
+									<blockquote>
 										<ul class="alt">
 											<li>{{restaurant.about}}</li>
 											<li><b>Cuisines Available:</b>
@@ -72,13 +49,17 @@
 									            {% endfor %}
 								            </li>
 										</ul>
-										</blockquote>
-									{% endfor %}
+									</blockquote>
+
+
+								{% endfor %}
 							    {% else %}
 							      <p>No restaurants are available currently.<br><a href="/">Go Home.</a></p>
 								{% endif %}
 							</div>
 						</section>
 					</article>
+
+
 
 {% endblock %}

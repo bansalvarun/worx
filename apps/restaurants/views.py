@@ -29,6 +29,9 @@ def restaurants(request):
 	args = {}
 	restaurants = Restaurant.objects.all()
 	args['restaurants'] = restaurants
+	args['localities'] = Locality.objects.all()
+	args['establishments'] = Establishment.objects.all()
+	args['cities'] = City.objects.all()
 	return render(request, 'restaurants/all.html', args)
 
 def menu(request, url):

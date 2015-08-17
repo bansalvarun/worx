@@ -47,9 +47,14 @@ class Establishment(Model):
 	name = CharField(max_length=30)
 	def __unicode__(self):
 		return self.name
+class City(Model):
+	name = CharField(max_length=30)
+	def __unicode__(self):
+		return self.name
 
 class Locality(Model):
-	city = CharField(max_length=30)
+	city = ForeignKey(City, blank=True, null=True)
+	part_of_city = CharField(max_length=50, default="East Delhi")
 	area = CharField(max_length=30)
 	def __unicode__(self):
 		return self.area
@@ -59,6 +64,7 @@ class Restaurant(Model):
 	name = CharField(max_length=50, default="Restaurant name")
 	about = CharField(max_length=500, blank=True)
 	address = CharField(max_length=300, blank=True)
+	city = ForeignKey(City, blank=True, null=True)
 	locality = ForeignKey(Locality, blank=True)
 	phone = CharField(max_length=13, blank=True)
 	url = CharField(max_length=30, unique=True, default="restaurant_name_area_no_space", blank=True)

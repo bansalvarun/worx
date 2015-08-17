@@ -3950,7 +3950,7 @@ h1{/* border-bottom: 5px solid rgba(14, 19, 16, 0); */}
 		@media screen and (max-width: 736px) {
 
 			#main > header {
-				padding: 5em 3em 3em 3em ;
+				/* padding: 5em 3em 3em 3em ; */
 			}
 
 				#main > header h2 {

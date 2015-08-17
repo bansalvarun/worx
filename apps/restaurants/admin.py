@@ -7,6 +7,7 @@ from .models import *
 admin.site.register(Cuisine)
 admin.site.register(Establishment)
 admin.site.register(Locality)
+admin.site.register(City)
 
 
 class DishPriceInLine(NestedTabularInline):
