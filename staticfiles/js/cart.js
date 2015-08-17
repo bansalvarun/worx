@@ -63,8 +63,17 @@
 		var table = document.getElementById("mycart");
 		var index;
 		var n = mylistPriceType.length;
+
+		var a = document.getElementsByClassName("total")[0].innerHTML;
+		var tot = Number(a) + Number(price);
+		document.getElementsByClassName("total")[0].innerHTML = tot;
+		document.getElementsByClassName("total")[1].innerHTML = tot;
+		document.getElementsByClassName("finalpay")[0].innerHTML = tot;
+		document.getElementsByClassName("finalpay")[1].innerHTML = tot;
+		// document.getElementsByClassName("servTax")[0].innerHTML = tot;
+
 		for(index = 0; index<n; index++){
-			console.log(mylistPriceType[index] == String(priceTypeId));
+			// console.log(mylistPriceType[index] == String(priceTypeId));
 			if(mylistPriceType[index] == String(priceTypeId)){
 				var cell = document.getElementById(String(priceTypeId));
 				// var cell = row.insertCell(3);
@@ -88,11 +97,22 @@
 		cell2.innerHTML = sym + String(priceType);
 		cell3.innerHTML = document.getElementById(String(tdClass)).innerHTML;
 		cell4.innerHTML = "&#8377;" + String(price);
+
+
+
+
 	}
 	function delItem(qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId){
 		itemQty = document.getElementsByClassName(String(qtyID))[0].innerHTML;
 		if(Number(itemQty) > 0){
 			document.getElementsByClassName(String(qtyID))[0].innerHTML = String(Number(itemQty)-1);	
+
+			var a = document.getElementsByClassName("total")[0].innerHTML;
+			var tot = String(Number(a) - Number(price));
+			document.getElementsByClassName("total")[0].innerHTML = tot;
+			document.getElementsByClassName("total")[1].innerHTML = tot;
+			document.getElementsByClassName("finalpay")[0].innerHTML = tot;
+			document.getElementsByClassName("finalpay")[1].innerHTML = tot;
 		}
 		var index;
 		var n = mylistPriceType.length;
@@ -104,4 +124,5 @@
 				return;
 			}
 		}
+
 	}
