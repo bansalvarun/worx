@@ -13,6 +13,7 @@ from django.template.defaultfilters import slugify
 class Profile(Model):
 	user = OneToOneField(User, related_name="profile")
 	
+
 	# def user_signed_up_(request, user, sociallogin=None, **kwargs):
 	# 	if sociallogin:
 	# 		# Extract first / last names from social nets and store on User record

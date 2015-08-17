@@ -33,6 +33,7 @@
 							{% if user.id %}
 								<a class="dropdown-toggle" href="#" data-toggle="dropdown">{{user.first_name}}<strong class="caret"></strong></a>
 	            				<div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px;">
+	            					<button class="btn btn-default" onClick="location.href='/profile/'">Profile</button><br/>
 	            					<button class="btn btn-default" onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';">Sign Out</button>
         						</div>
 							{% else %}
@@ -79,7 +80,7 @@
 	        		<div class='modal-body-right'>
 	        			<div class="modal-social-icons">
 	        				<a class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
-	        				<a class="btn btn-default google" onclick="location.href='/accounts/google/login'"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
+	        				<a class="btn btn-default google" onclick="location.href='/accounts/google/login/?next={{request.path}}';"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
 	        			</div> 
 	        		</div>	
 	        	</div>

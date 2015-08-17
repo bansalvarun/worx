@@ -1,0 +1,30 @@
+{{user.id}}<br/>
+{{user.first_name}}
+{{user.last_name}}<br/>
+{{user.username}}<br/>
+{% load i18n %}
+
+    <!-- <form method="POST" action="{% url 'account_change_password' %}" class="password_change"> -->
+        <!-- {% csrf_token %} -->
+        <!-- {{ form.as_p }} -->
+
+{% if user.password %}
+	<button class="btn btn-default btn-large" onclick="location.href='/accounts/password/set'">Change Password</button>
+{% else %}
+
+	<form method="POST" action="{% url 'account_set_password' %}" class="password_set">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
+        <p><label for="id_password1">Password:</label> <input id="id_password1" name="password1" placeholder="Password" type="password"></p>
+		<p><label for="id_password2">Password (again):</label> <input id="id_password2" name="password2" placeholder="Password (again)" type="password"></p>
+		{% if redirect_field_value %}
+			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+		{% endif %}
+        <input type="submit" name="action" value="{% trans 'Set Password' %}">
+
+    </form>
+
+
+
+{% endif %}
+
+

@@ -4,7 +4,18 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
+from django.contrib.auth.decorators import login_required
 import datetime
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+  # userp = get_object_or_404(Profile, pk=url)
+  args ={}
+  # args['user'] = user;
+  return render(request, 'profile.html', args) 
+
+
+
 
 def error404(request):
     return render(request,'404.html', status=404)

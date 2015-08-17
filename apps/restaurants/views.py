@@ -4,6 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 
+
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         args = {}

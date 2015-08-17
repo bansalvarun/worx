@@ -18,12 +18,10 @@
 				<h2 style="float:center;text-align:center">{% trans "Sign In " %}</h2>
 				{% get_providers as socialaccount_providers %}
 				{% if socialaccount_providers %}
-<!-- 					<p>{% blocktrans with site.name as site_name %}Please sign in with one of your existing accounts for {{ site_name }} account: {% endblocktrans %}</p>
- -->					<div style="float:center;text-align:center">
+					<div style="float:center;text-align:center">
 	        				<a class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
-	        				<a href='#' class="btn btn-default google"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
+	        				<a onclick="location.href='/accounts/google/login/?next={{request.path}}';" class="btn btn-default google"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
 					</div>
-					<!-- {% include "socialaccount/snippets/login_extra.html" %} -->
 				{% else %}
 					<p>{% blocktrans %}If you have not created an account yet, then please
 					<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
@@ -37,6 +35,7 @@
 				  <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
 				  <p><input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Username" type="text"></p>
 				  <p><input id="id_password" name="password" placeholder="Password" type="password"></p>
+
 				  {% if redirect_field_value %}
 				  	<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
 				  {% endif %}
