@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^404/$', error404),
     url(r'^$', home),
     url(r'^profile/$', profile),
-
+    url(r'^grappelli/', include('grappelli.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += [

@@ -1,6 +1,5 @@
 from django.db.models import *
 import datetime
-from django.db.models import * 
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
@@ -8,7 +7,6 @@ from allauth.account.models import EmailAddress
 from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
-# Create your models here.
 
 
 class Profile(Model):
