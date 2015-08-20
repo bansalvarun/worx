@@ -36,10 +36,5 @@ urlpatterns = [
     url(r'^profile/$', profile),
     url(r'^grappelli/', include('grappelli.urls')),
 ]
-if settings.DEBUG:
-    urlpatterns += [
-        url(r'^staticfiles/(?P<path>.*)$', serve, {
-            'document_root': settings.STATIC_ROOT,
-        }),
-   ]
+
 handler404 = 'error404'

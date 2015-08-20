@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+| Restaurants | Cuisines
+{% endblock %}
+
+
+{% block nav2 %}
+	<nav id= "nav" style="left:22px; top:13px">
+		<a href="/"><h4>WORX.</h4></a>
+	</nav>
+{% endblock %}
+
+
+
+{% block nav %}
+	<li><a href="/restaurants/">Restaurants</a></li>
+	<li><a href="/restaurants/cuisines/">Cuisines</a></li>
+	<li><a href="/restaurants/localities/">Localities</a></li>
+	<li><a href="/restaurants/establishments/">Establishments</a></li>
+{% endblock %}
+
+{% block content %}
+			<body>
+				<!-- Main -->
+					<article id="cuisines">
+						<header>
+							<h2>Cuisines</h2>
+							<p></p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<h3>Cuisines</h3>
+								<hr />
+								{% if cuisines %}
+									{% for cuisine in cuisines %}
+								        {% if cuisine.restaurant_set.all %}
+											<h4>{{cuisine}}</h4>
+												<blockquote>
+													<ul class="alt">
+											            {% for restaurant in cuisine.restaurant_set.all %}
+															<li><div class="row"><h4><a href="/restaurants/{{restaurant.id}}/menu">{{restaurant}}, {{restaurant.locality}}</a></h4>
+															{% if restaurant.image %}
+																<img src="" alt="" height= "8%" width="8%"/></div></li>
+															{% endif %}
+														{% endfor %}
+													</ul>
+												</blockquote>
+										{% endif %}
+									{% endfor %}
+								{% else %}
+									<h4> No Cuisines are available right now.
+								{% endif %}
+
+							</div>
+						</section>
+					</article>
+{% endblock %}

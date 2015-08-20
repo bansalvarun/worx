@@ -1,0 +1,172 @@
+{% extends "./base.html" %}
+{% load staticfiles %}
+{% block nav %}
+    <li><a href="/restaurants/cusines/">Cusines</a></li>
+    <li><a href="/restaurants/localities/">Localities</a></li>
+    <li><a href="/restaurants/establishments/">Establishments</a></li>
+{% endblock %}
+
+
+{% block content %}
+   <section id="about">
+
+	   <div class="row">
+
+		   <div class="twelve columns">
+
+			   <div class="about-text">
+				   <h1 class="responsive-headline">Restraunts in Delhi-NCR</h1>
+			   <p><br>Replacing old and generic paper menus with new digital menus with many other services incorporated into one. Revolutionizing the way we order our food.</p>
+               <p><br>Check menu for your favorite Restaurants/Cafe/Bakery/Bar</p>
+            </div>
+            <div class="buttons" align="center">
+               <!-- <a class="button learn-more smoothscroll" href="">Learn More</a> -->
+            <form action="/restaurants/search/" method="get" >
+            <div class="form" align="center" style="position:relative;  width = " >
+		        <a ><input type="text" name="q" value="Name or Locality"></a>
+		        <a><input type="submit" value="Search"></a>
+            </div>
+			</form>
+            </div>
+
+
+			{% if restaurant.image %}
+	            <div class="about-image">
+	               <img src="/uploads/images/social.jpg" alt="" />
+	            </div>
+            {% endif %}
+		   </div>
+
+	   </div>
+
+   </section> <!-- Homepage about end -->
+
+
+{% if restaurants or restaurants_by_locality or restaurants_by_cusines or restaurants_by_estab %}
+
+    <!-- restaurants Section
+   ================================================== -->
+   <section id="restaurant">
+      <div class="row section-head">
+		{% if restaurants %}
+			<h1>Results in Restaurants matching name</h1> 
+         <!-- <h1>Bakery</h1> -->
+  	  </div>
+      <div class="row">
+         {% for restaurant in restaurants %}
+               <div class="resto-block">
+                  <p class="resto-rating"></p>
+                  <p class="resto-name">  
+                     <a href="/restaurants/{{restaurant.id}}/menu">
+                        {{restaurant.name}}
+                     </a>
+                  </p>
+                  <ul class="features">
+                     <li>{{restaurant.about}}</li>
+                     <li>{{restaurant.locality}}</li>
+                  </ul>
+              </div> <!-- End restaurant Block -->
+          {% endfor %}
+       </div>
+       {% endif %}
+
+      <div class="row section-head">
+		{% if restaurants_by_locality %}
+			<h1>Results in Restaurants matching locality</h1> 
+         <!-- <h1>Bakery</h1> -->
+  	  </div>
+      <div class="row">
+         {% for restaurants in restaurants_by_locality %}
+         	{% for restaurant in restaurants %}
+               <div class="resto-block">
+                  <p class="resto-rating"></p>
+                  <p class="resto-name">  
+                     <a href="/restaurants/{{restaurant.id}}/menu">
+                        {{restaurant.name}}
+                     </a>
+                  </p>
+                  <ul class="features">
+                     <li>{{restaurant.about}}</li>
+                     <li>{{restaurant.locality}}</li>
+                  </ul>
+              </div> <!-- End restaurant Block -->
+          	{% endfor %}
+          {% endfor %}
+       </div>
+       {% endif %}
+
+
+      <div class="row section-head">
+		{% if restaurants_by_cusines %}
+			<h1>Results in Restaurants matching cusines</h1> 
+         <!-- <h1>Bakery</h1> -->
+  	  </div>
+      <div class="row">
+         {% for restaurant in restaurants_by_cusines %}
+               <div class="resto-block">
+                  <p class="resto-rating"></p>
+                  <p class="resto-name">  
+                     <a href="/restaurants/{{restaurant.id}}/menu">
+                        {{restaurant.name}}
+                     </a>
+                  </p>
+                  <ul class="features">
+                     <li>{{restaurant.about}}</li>
+                     <li>{{restaurant.locality}}</li>
+                  </ul>
+              </div> <!-- End restaurant Block -->
+          {% endfor %}
+       </div>
+       {% endif %}
+      <div class="row section-head">
+		{% if restaurants_by_estab %}
+			<h1>Results in Restaurants matching establishments</h1> 
+         <!-- <h1>Bakery</h1> -->
+  	  </div>
+      <div class="row">
+         {% for restaurant in restaurants_by_estab %}
+               <div class="resto-block">
+                  <p class="resto-rating"></p>
+                  <p class="resto-name">  
+                     <a href="/restaurants/{{restaurant.id}}/menu">
+                        {{restaurant.name}}
+                     </a>
+                  </p>
+                  <ul class="features">
+                     <li>{{restaurant.about}}</li>
+                     <li>{{restaurant.locality}}</li>
+                  </ul>
+              </div> <!-- End restaurant Block -->
+          {% endfor %}
+       </div>
+       {% endif %}
+
+
+   </section> <!-- restaurant End -->
+{% else %}
+   <section id="restaurant">
+      <div class="row section-head">
+         <!-- <h1>Bakery</h1> -->
+      </div>
+      <div class="row">
+               <div class="resto-block">
+                  <!-- <p class="resto-rating"></p> -->
+                  <p class="resto-name">  
+                        No results found for {{q}}</br>
+                     <a href="/restaurants/">
+                     	See All restaurants
+                     </a>
+                  </p>
+
+              </div> <!-- End restaurant Block -->
+      </div>
+   </section> <!-- restaurant End -->
+
+
+{% endif %}
+
+
+
+
+
+{% endblock %}

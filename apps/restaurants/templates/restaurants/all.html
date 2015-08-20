@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block nav2 %}
+	<nav id= "nav" style="left:22px; top:13px">
+		<a href="/"><h4>worx.</h4></a>
+	</nav>
+{% endblock %}
+
+
+
+{% block nav %}
+	<li><a href="/restaurants/">Restaurants</a></li>
+	<li><a href="/restaurants/cuisines/">Cuisines</a></li>
+	<li><a href="/restaurants/localities/">Localities</a></li>
+	<li><a href="/restaurants/establishments/">Establishments</a></li>
+{% endblock %}
+
+{% block content %}
+			<body>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Restaurants</h2>
+							<p>Delhi, NCR, Punjab</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+								<h3>Restaurants</h3>
+							    {% if restaurants %}
+							      {% for restaurant in restaurants %}
+									<div class="row"><h4><a href="/restaurants/{{restaurant.id}}/menu">{{restaurant.name}}, {{restaurant.locality}}</a></h4>
+									{% if restaurant.image %}
+										<img src="{{restaurant.image}}" alt="" height= "10%" width="10%"/>
+									{% endif %}
+									</div>
+									<blockquote>
+										<ul class="alt">
+											<li>{{restaurant.about}}</li>
+											<li><b>Cuisines Available:</b>
+												{% for cusine in restaurant.cuisines.all %}
+          											{{cusine}},
+        										{% endfor %}
+											</li>
+											<li><b>Establishment:</b>
+									            {% for estab in restaurant.establishment.all %}
+									              {{estab}}
+									            {% endfor %}
+								            </li>
+										</ul>
+									</blockquote>
+
+
+								{% endfor %}
+							    {% else %}
+							      <p>No restaurants are available currently.<br><a href="/">Go Home.</a></p>
+								{% endif %}
+							</div>
+						</section>
+					</article>
+
+
+
+{% endblock %}
