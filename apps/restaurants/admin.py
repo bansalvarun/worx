@@ -17,7 +17,8 @@ class DishPriceInLine(NestedTabularInline):
 
 class DishInline(NestedStackedInline):
 	model = Dish
-	exclude = ('userUpVotes','userDownVotes', )
+	# exclude = ('userUpVotes','userDownVotes', )
+	filter_horizontal = ('userUpVotes','userDownVotes', )
 	extra = 1
 	fk_name = 'dish_type'
 	inlines = [DishPriceInLine]

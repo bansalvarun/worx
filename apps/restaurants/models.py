@@ -104,8 +104,8 @@ class Dish(Model):
 	dish_type = ForeignKey(Dish_type)
 	name = CharField(max_length=50, default="dish name", blank=True, null=True)
 	about = CharField(max_length=100, blank=True)
-	userUpVotes = ManyToManyField(Profile, blank=True, related_name='likes')
-	userDownVotes = ManyToManyField(Profile, blank=True, related_name='dislike')
+	userUpVotes = ManyToManyField(User, blank=True, related_name='likes')
+	userDownVotes = ManyToManyField(User, blank=True, related_name='dislike')
 	def __unicode__(self):
 		return self.name
 	class Meta:

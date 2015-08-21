@@ -102,24 +102,83 @@
 			{% endif %}
 			{% for dish in dishtype.dish_set.all %}
 				<li>
-					<div class="row myRow" onclick="expand('ROW{{dish}}')" title="tap to place order">
+					<div class="row myRow"  title="tap to place order">
 						<span style="cursor:s-resize" >
-							<h4 style="padding-top:5px; padding-bottom:20px" >
-							{{dish}}
+							<h4 style="padding-top:5px; padding-bottom:20px" onclick="expand('ROW{{dish}}')">
+							{{dish}} 
 							</h4>
 						</span>
-						<div style="position: absolute;right: 0; margin-top:20px">
-							<div class="material-icons mdl-badge mdl-badge--no-background"  data-badge="0" style="color:#1E90FF" >
-								<span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span>
-							</div>
 
-							<div class="material-icons mdl-badge mdl-badge--no-background" data-badge="0" style="color:black">
-								<span class="glyphicon glyphicon-thumbs-down" style="font-size:20px"></span>
+						{% if user.id %}
+							<form action="/restaurants/like/{{dish.id}}/" method="post" name="like{{dish.id}}">
+							{% csrf_token %}
+							    <input id="a" style="display:none" type="text" name="choice" value='like'>
+							    <input id="a" style="display:none" type="text" name="userid" value='{{user.id}}'>
+							    <input id="a" style="display:none" type="text" name="restoid" value='{{restaurant.id}}'>
+								<input type="submit" value="Like" style="display:none" />
+							</form>
+							<form action="/restaurants/like/{{dish.id}}/" method="post" name="unlike{{dish.id}}">
+							{% csrf_token %}
+							    <input id="a" style="display:none" type="text" name="choice" value='unlike'>
+							    <input id="a" style="display:none" type="text" name="userid" value='{{user.id}}'>
+							    <input id="a" style="display:none" type="text" name="restoid" value='{{restaurant.id}}'>
+								<input type="submit" value="Dislike"  style="display:none" />
+							</form>
+							<form action="/restaurants/like/{{dish.id}}/" method="post" name="dislike{{dish.id}}">
+							{% csrf_token %}
+							    <input id="a" style="display:none" type="text" name="choice" value='dislike'>
+							    <input id="a" style="display:none" type="text" name="userid" value='{{user.id}}'>
+							    <input id="a" style="display:none" type="text" name="restoid" value='{{restaurant.id}}'>
+								<input type="submit" value="Dislike"  style="display:none" />
+							</form>
+
+							<form action="/restaurants/like/{{dish.id}}/" method="post" name="undislike{{dish.id}}">
+							{% csrf_token %}
+							    <input id="a" style="display:none" type="text" name="choice" value='undislike'>
+							    <input id="a" style="display:none" type="text" name="userid" value='{{user.id}}'>
+							    <input id="a" style="display:none" type="text" name="restoid" value='{{restaurant.id}}'>
+								<input type="submit" value="Dislike"  style="display:none" />
+							</form>
+							<div style="position: absolute;right: 0; margin-top:20px">
+								{% if user in dish.userUpVotes.all %}
+								<div onClick="document.forms['unlike{{dish.id}}'].submit();" class="material-icons mdl-badge mdl-badge--no-background"  data-badge="{{dish.userUpVotes.count}}" style="color:#1E90FF" >
+									<span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span>
+								</div>
+								{% else %}
+								<div onClick="document.forms['like{{dish.id}}'].submit();" class="material-icons mdl-badge mdl-badge--no-background"  data-badge="{{dish.userUpVotes.count}}" style="color:grey" >
+									<span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span>
+								</div>
+								{% endif %}
+
+								{% if user in dish.userDownVotes.all %}
+								<div onClick="document.forms['undislike{{dish.id}}'].submit();" class="material-icons mdl-badge mdl-badge--no-background" data-badge="{{dish.userDownVotes.count}}" style="color:black" >
+									<span class="glyphicon glyphicon-thumbs-down" style="font-size:20px"></span>
+								</div>
+								{% else %}
+								<div onClick="document.forms['dislike{{dish.id}}'].submit();" class="material-icons mdl-badge mdl-badge--no-background"  data-badge="{{dish.userDownVotes.count}}" style="color:grey" >
+									<span class="glyphicon glyphicon-thumbs-down" style="font-size:20px"></span>
+								</div>
+								{% endif %}
+
+
+
+								<button type="button" class="btn btn-default btn-xs" style="height:25px; margin:0px 0px 20px 10px" onclick="expand('ROW{{dish}}')">
+									<!-- <span class="glyphicon glyphicon-plus"></span> -->Add
+								</button>
 							</div>
-							<button type="button" class="btn btn-default btn-xs" style="height:25px; margin:0px 0px 20px 10px">
-								<!-- <span class="glyphicon glyphicon-plus"></span> -->Add
-							</button>
-						</div>
+						{% else %}
+							<div style="position: absolute;right: 0; margin-top:20px">
+								<div data-toggle="modal" data-target="#login-modal" class="material-icons mdl-badge mdl-badge--no-background"  data-badge="{{dish.userUpVotes.count}}" style="color:#grey" >
+									<span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span>
+								</div>
+								<div data-toggle="modal" data-target="#login-modal" class="material-icons mdl-badge mdl-badge--no-background" data-badge="{{dish.userDownVotes.count}}" style="color:#grey" >
+									<span class="glyphicon glyphicon-thumbs-down" style="font-size:20px"></span>
+								</div>
+								<button type="button" class="btn btn-default btn-xs" style="height:25px; margin:0px 0px 20px 10px" onclick="expand('ROW{{dish}}')">
+									<!-- <span class="glyphicon glyphicon-plus"></span> -->Add
+								</button>
+							</div>
+						{% endif %}
 					</div>
 					<div id="ROW{{dish}}" style="display: none;">
 						<blockquote >

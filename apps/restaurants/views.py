@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from apps.restaurants.models import *
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse
+from django.core.urlresolvers import reverse
 # Create your views here.
 
 
@@ -62,36 +63,53 @@ def establishments(request):
 	args['establishments'] = establishments
 	return render(request, 'restaurants/establishments.html', args)
 
-def vote(request):
-   dish_id = int(request.POST.get('id'))
-   vote_type = request.POST.get('type')
-   vote_action = request.POST.get('action')
-   dish = get_object_or_404(Dish, pk=dish_id)
-   thisUserUpVote = Dish.liked_by.filter(id = request.Profile.user.id).count()
-   thisUserDownVote = Dish.disliked_by.filter(id = request.Profile.user.id).count()
+# def vote(request, question_id):
+#     p = get_object_or_404(Question, pk=question_id)
+#     try:
+#         selected_choice = p.choice_set.get(pk=request.POST['choice'])
+#     except (KeyError, Choice.DoesNotExist):
+#         # Redisplay the question voting form.
+#         return render(request, 'polls/detail.html', {
+#             'question': p,
+#             'error_message': "You didn't select a choice.",
+#         })
+#     else:
+#         selected_choice.votes += 1
+#         selected_choice.save()
+#         # Always return an HttpResponseRedirect after successfully dealing
+#         # with POST data. This prevents data from being posted twice if a
+#         # user hits the Back button.
+#         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
-   if (vote_action == 'vote'):
-      if (thisUserUpVote == 0) and (thisUserDownVote == 0):
-         if (vote_type == 'up'):
-            Dish.userUpVotes.add(request.user)
-         elif (vote_type == 'down'):
-            Dish.userDownVotes.add(request.user)
-         else:
-            return HttpResponse('error-unknown vote type')
-      else:
-         return HttpResponse('error - already voted', thisUserUpVote, thisUserDownVote)
-   elif (vote_action == 'recall-vote'):
-      if (vote_type == 'up') and (thisUserUpVote == 1):
-         Dish.userUpVotes.remove(request.user)
-      elif (vote_type == 'down') and (thisUserDownVote ==1):
-         Dish.userDownVotes.remove(request.user)
-      else:
-         return HttpResponse('error - unknown vote type or no vote to recall')
-   else:
-      return HttpResponse('error - bad action')
+def likeDish(request, dishid):
+  # print "blah blah"
+  dish = get_object_or_404(Dish, pk=dishid)
+  # myuser = get_object_or_404(User, pk=int(request.POST['userid']))
+  # form = MyForm(request.POST)
+  # print form
+  print request.POST.get('choice')
+  myid = request.POST.get('userid')
+  print myid
+  myuser = get_object_or_404(User, pk=myid)
+  if(request.POST['choice'] == 'like'):
+    dish.userUpVotes.add(myuser)
+    dish.userDownVotes.remove(myuser)
+    dish.save()
+  elif(request.POST['choice'] == 'unlike'):
+    dish.userUpVotes.remove(myuser)
+    dish.userDownVotes.remove(myuser)
+    dish.save()
+  elif(request.POST['choice'] == 'undislike'):
+    dish.userUpVotes.remove(myuser)
+    dish.userDownVotes.remove(myuser)
+    dish.save()
 
-
-   num_votes = Dish.userUpVotes.count() - Dish.userDownVotes.count()
-
-   return HttpResponse(num_votes)
-
+  elif(request.POST['choice'] == 'dislike'):
+    dish.userUpVotes.remove(myuser)
+    dish.userDownVotes.add(myuser)
+    dish.save()
+  # args = {}
+  restoid = request.POST['restoid']
+  restaurant = get_object_or_404(Restaurant, pk=restoid)
+  # args['restaurant'] = restaurant
+  return HttpResponseRedirect(reverse('menu', args=(restoid)))
