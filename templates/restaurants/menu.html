@@ -7,14 +7,14 @@
 
 
 {% block navcart %}
-	<li ><a data-toggle="modal" href="#myModal"><h4> 
+	<li ><a data-toggle="modal" href="#myModal" style="text-decoration:None"><h4> 
 		<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 	&#x20B9<span class="finalpay">0</span></h4></a></li>
 {% endblock %}
 
 {% block nav2 %}
 	<nav id= "nav" style="left:22px; top:13px">
-		<a href="/"><h4>worx.</h4></a>
+		<h4 onclick=(location.href="/") style="cursor:pointer; max-width:0px">worx.</h4>
 	</nav>
 
 {% endblock %}
@@ -24,10 +24,8 @@
 
 {% block nav %}
 	<li><a href="/restaurants" >Restaurants</a></li>
-    <li>{{restaurant}}</li>
-    {% for dishtype in restaurant.dish_type_set.all %}  
-      <li><a href="#{{dishtype}}" >{{dishtype}}</a></li>
-    {% endfor %}
+    
+
 {% endblock %}
 
 
