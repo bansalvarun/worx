@@ -69,37 +69,40 @@ def establishments(request):
 	args['establishments'] = establishments
 	return render(request, 'restaurants/establishments.html', args)
 
-@login_required
-@require_POST
 def likeDish(request):
   dishid = request.POST.get('dishid')
   dish = get_object_or_404(Dish, pk=dishid)
   myid = request.POST.get('userid')
+  flag = "grey"
   myuser = get_object_or_404(User, pk=myid)
-  if((request.POST['choice'] == 'like') or (request.POST['choice'] == 'unlike')):
-    print dish.userDownVotes.all()
+  if((request.POST['choice'] == 'like')):
+    # print dish.userDownVotes.all()
     if(myuser not in dish.userUpVotes.all()):
       dish.userUpVotes.add(myuser)
+      dish.save()
       dish.userDownVotes.remove(myuser)
+      dish.save()
       flag = "blue"
-      dish.save()
-    else:
+    elif(myuser in dish.userUpVotes.all()):
       dish.userUpVotes.remove(myuser)
-      dish.userDownVotes.remove(myuser)
-      flag = "grey"
       dish.save()
-  elif((request.POST['choice'] == 'dislike') or (request.POST['choice'] == 'undislike')):
-    print dish.userDownVotes.all()
+      dish.userDownVotes.remove(myuser)
+      dish.save()
+      flag = "grey"
+  elif((request.POST['choice'] == 'dislike')):
+    # print dish.userDownVotes.all()
     if(myuser not in dish.userDownVotes.all()):
       dish.userDownVotes.add(myuser)
+      dish.save()
       dish.userUpVotes.remove(myuser)
+      dish.save()
       flag = "black"
-      dish.save()
-    else:
+    elif(myuser in dish.userDownVotes.all()):
       dish.userDownVotes.remove(myuser)
-      dish.userUpVotes.remove(myuser)
-      flag = "grey"
       dish.save()
+      dish.userUpVotes.remove(myuser)
+      dish.save()
+      flag = "grey"
 
   response_data = {}
   response_data['like'] = dish.userUpVotes.count()

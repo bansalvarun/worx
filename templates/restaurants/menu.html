@@ -56,7 +56,6 @@
     <input id="dishIdForm" type="text" name="dishid" value=''>
     <input id="choiceForm" type="text" name="choice" value=''>
     <input id="userIdForm" type="text" name="userid" value='{{user.id}}'>
-    <input id="restoIdForm" type="text" name="restoid" value='{{restaurant.id}}'>
 	<input type="submit"/>
 </form>
 <script type="text/javascript">
@@ -83,7 +82,6 @@
 	            'dishid' :$('input[name=dishid]').val(),
 	            'choice' :$('input[name=choice').val(),
 	            'userid' :$('input[name=userid').val(),
-	            'restoid':$('input[name=restoid').val(),
 	        };
 	        // process the form
 	        $.ajax({
@@ -118,6 +116,7 @@
 	        event.preventDefault();
 	    });
 		$("#myform").submit();
+
 	}
 </script>
 <h3>Menu</h3>
@@ -184,7 +183,7 @@
 						{% if user.id %}
 							<div style="position: absolute;right: 0; margin-top:20px">
 								{% if user in dish.userUpVotes.all %}
-									<div onClick="like({{dish.id}}, 'unlike'); " class="material-icons mdl-badge mdl-badge--no-background " data-badge="{{dish.userUpVotes.count}}" style="color:#1E90FF" id="superlike{{dish.id}}">
+									<div onClick="like({{dish.id}}, 'like'); " class="material-icons mdl-badge mdl-badge--no-background " data-badge="{{dish.userUpVotes.count}}" style="color:#1E90FF" id="superlike{{dish.id}}">
 										<span class="glyphicon glyphicon-thumbs-up" style="font-size:20px"></span>
 									</div>
 								{% else %}
@@ -194,7 +193,7 @@
 								{% endif %}
 
 								{% if user in dish.userDownVotes.all %}
-									<div onClick="like({{dish.id}}, 'undislike');" class="material-icons mdl-badge mdl-badge--no-background " data-badge="{{dish.userDownVotes.count}}" style="color:black" id="superdislike{{dish.id}}">
+									<div onClick="like({{dish.id}}, 'dislike');" class="material-icons mdl-badge mdl-badge--no-background " data-badge="{{dish.userDownVotes.count}}" style="color:black" id="superdislike{{dish.id}}">
 										<span class="glyphicon glyphicon-thumbs-down" style="font-size:20px"></span>
 									</div>
 								{% else %}
