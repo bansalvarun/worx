@@ -2,7 +2,12 @@ from django.shortcuts import get_object_or_404, render
 from apps.restaurants.models import *
 from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse
-import json
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -64,6 +69,8 @@ def establishments(request):
 	args['establishments'] = establishments
 	return render(request, 'restaurants/establishments.html', args)
 
+@login_required
+@require_POST
 def likeDish(request):
   dishid = request.POST.get('dishid')
   dish = get_object_or_404(Dish, pk=dishid)
