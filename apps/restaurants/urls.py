@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^localities/', localities),
     url(r'^establishments/', establishments),
     url(r'^search/', search),    
-    url(r'^like/(\d+)/$', likeDish),
+    url(r'^like/', likeDish),
     # url(r'^dislike/(\d+)/(\d+)/(\d+)$', dislikeDish),
 
 ]

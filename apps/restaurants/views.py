@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from apps.restaurants.models import *
 from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse
+import json
 # Create your views here.
 
 
@@ -81,35 +82,38 @@ def establishments(request):
 #         # user hits the Back button.
 #         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
-def likeDish(request, dishid):
-  # print "blah blah"
+def likeDish(request):
+  dishid = request.POST.get('dishid')
   dish = get_object_or_404(Dish, pk=dishid)
-  # myuser = get_object_or_404(User, pk=int(request.POST['userid']))
-  # form = MyForm(request.POST)
-  # print form
-  print request.POST.get('choice')
   myid = request.POST.get('userid')
-  print myid
   myuser = get_object_or_404(User, pk=myid)
-  if(request.POST['choice'] == 'like'):
-    dish.userUpVotes.add(myuser)
-    dish.userDownVotes.remove(myuser)
-    dish.save()
-  elif(request.POST['choice'] == 'unlike'):
-    dish.userUpVotes.remove(myuser)
-    dish.userDownVotes.remove(myuser)
-    dish.save()
-  elif(request.POST['choice'] == 'undislike'):
-    dish.userUpVotes.remove(myuser)
-    dish.userDownVotes.remove(myuser)
-    dish.save()
+  if((request.POST['choice'] == 'like') or (request.POST['choice'] == 'unlike')):
+    print dish.userDownVotes.all()
+    if(myuser not in dish.userUpVotes.all()):
+      dish.userUpVotes.add(myuser)
+      dish.userDownVotes.remove(myuser)
+      flag = "blue"
+      dish.save()
+    else:
+      dish.userUpVotes.remove(myuser)
+      dish.userDownVotes.remove(myuser)
+      flag = "grey"
+      dish.save()
+  elif((request.POST['choice'] == 'dislike') or (request.POST['choice'] == 'undislike')):
+    print dish.userDownVotes.all()
+    if(myuser not in dish.userDownVotes.all()):
+      dish.userDownVotes.add(myuser)
+      dish.userUpVotes.remove(myuser)
+      flag = "black"
+      dish.save()
+    else:
+      dish.userDownVotes.remove(myuser)
+      dish.userUpVotes.remove(myuser)
+      flag = "grey"
+      dish.save()
 
-  elif(request.POST['choice'] == 'dislike'):
-    dish.userUpVotes.remove(myuser)
-    dish.userDownVotes.add(myuser)
-    dish.save()
-  # args = {}
-  restoid = request.POST['restoid']
-  restaurant = get_object_or_404(Restaurant, pk=restoid)
-  # args['restaurant'] = restaurant
-  return HttpResponseRedirect(reverse('menu', args=(restoid)))
+  response_data = {}
+  response_data['like'] = dish.userUpVotes.count()
+  response_data['dislike'] = dish.userDownVotes.count()
+  response_data['flag'] = flag
+  return HttpResponse(json.dumps(response_data),content_type="application/json")
