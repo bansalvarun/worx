@@ -8,6 +8,5 @@ urlpatterns = [
     url(r'^establishments/', establishments),
     url(r'^search/', search),    
     url(r'^like/', likeDish),
-    # url(r'^dislike/(\d+)/(\d+)/(\d+)$', dislikeDish),
 
 ]

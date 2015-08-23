@@ -3,6 +3,8 @@ from apps.restaurants.models import *
 from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse
 import json
+
+
 # Create your views here.
 
 
@@ -14,7 +16,6 @@ def search(request):
         args['q'] = q
         restaurants = Restaurant.objects.filter(name__icontains=q)
         args['restaurants'] = restaurants 
-
         localities = Locality.objects.filter(city__icontains = q)
         if(localities):
         	args['localities'] = localities
@@ -22,7 +23,6 @@ def search(request):
         	for locality in localities:
         		mylist.append(Restaurant.objects.filter(locality = locality))
     		args['restaurants_by_locality'] = mylist
-
         return render(request, 'restaurants/search.html',args)
     else:
         return render(request, 'restaurants/search.html')
@@ -63,24 +63,6 @@ def establishments(request):
 	establishments = Establishment.objects.all()
 	args['establishments'] = establishments
 	return render(request, 'restaurants/establishments.html', args)
-
-# def vote(request, question_id):
-#     p = get_object_or_404(Question, pk=question_id)
-#     try:
-#         selected_choice = p.choice_set.get(pk=request.POST['choice'])
-#     except (KeyError, Choice.DoesNotExist):
-#         # Redisplay the question voting form.
-#         return render(request, 'polls/detail.html', {
-#             'question': p,
-#             'error_message': "You didn't select a choice.",
-#         })
-#     else:
-#         selected_choice.votes += 1
-#         selected_choice.save()
-#         # Always return an HttpResponseRedirect after successfully dealing
-#         # with POST data. This prevents data from being posted twice if a
-#         # user hits the Back button.
-#         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
 def likeDish(request):
   dishid = request.POST.get('dishid')

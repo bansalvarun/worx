@@ -32,15 +32,15 @@ For more details contact varun13168@iiitd.ac.in
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="/">worx.</a></h1>
+						<h1 onclick=(location.href="/")>worx.</h1>
 							{% block nav2 %} {% endblock %}
 						<nav id="nav" >
 							<ul >
 							{% if user.id %}
-								<a class="dropdown-toggle" href="#" data-toggle="dropdown">{{user.first_name}}<strong class="caret"></strong></a>
-	            				<div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px;">
-	            					<button class="btn btn-default" onClick="location.href='/profile/'">Profile</button><br/>
-	            					<button class="btn btn-default" onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';">Sign Out</button>
+								<a class="dropdown-toggle"  href="#" data-toggle="dropdown">{{user.first_name}}<strong class="caret"></strong></a>
+	            				<div class="dropdown-menu" style="padding: 0px 0px 0px 0px;">
+<!-- 	            					<button class="btn btn-default" onClick="location.href='/profile/'">Profile</button><br/> -->
+	            					<li><button class="btn btn-default btn-xs" onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';">Sign Out</button></li>
         						</div>
 							{% else %}
 								<a  id='modal-launcher'  data-toggle="modal" data-target="#login-modal" >Sign In</a>
