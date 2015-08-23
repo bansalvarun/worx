@@ -93,7 +93,6 @@
             	encode          : true,
             	success: function (json) {
 	              // alert('form was submitted');
-	              	console.log(json);
 	          		a.setAttribute('data-badge', String(json["like"]));
 	          		b.setAttribute('data-badge', String(json['dislike']));
 	              	if(json["flag"]=="grey"){
@@ -118,6 +117,7 @@
 	        event.preventDefault();
 	    });
 		$("#myform").submit();
+		console.log('1');
 
 	}
 </script>
