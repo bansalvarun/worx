@@ -34,7 +34,7 @@ def search(request):
 
 def restaurants(request):
 	args = {}
-	restaurants = Restaurant.objects.all()
+	restaurants = Restaurant.objects.filter(enable = True)
 	args['restaurants'] = restaurants
 	args['localities'] = Locality.objects.all()
 	args['establishments'] = Establishment.objects.all()
