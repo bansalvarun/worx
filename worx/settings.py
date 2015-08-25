@@ -14,6 +14,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import dj_database_url
 
+# for bootstrap_admin
+# from django.conf import global_settings
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -25,7 +28,7 @@ SECRET_KEY = '$)p&gq(5_5d_@q^mo@^2ebk_r9!@j6qx=^^vsb&*(6$$&8!^gc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 
@@ -34,7 +37,10 @@ TEMPLATE_DEBUG = DEBUG
 
 INSTALLED_APPS = (
     'suit',
+    # 'adminplus',
     # 'grappelli',
+    # 'bootstrap_admin',
+    # 'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +60,7 @@ INSTALLED_APPS = (
     
     # 'apps.people',
 )
+
 
 SITE_ID = 1
 
@@ -82,10 +89,18 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+# for bootstrap_admin
+                # 'django.template.context_processors.i18n',
+                # 'django.template.context_processors.media',
+                # 'django.template.context_processors.static',
+                # 'django.template.context_processors.tz',
+                # 'django.template.context_processors.request',
             ],
         },
     },
 ]
+# BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 AUTHENTICATION_BACKENDS = (
     
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -154,3 +169,11 @@ LOGIN_REDIRECT_URL = '/'
 
 # LOGOUT_REDIRECT_URL = '#'
 ACCOUNT_LOGOUT_ON_GET =True
+
+
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'worx.',
+    'CONFIRM_UNSAVED_CHANGES': True,
+    'MENU_EXCLUDE': ('SEARCH_URL',),
+}

@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 from django.conf import settings
-import apps.restaurants.models
 
 
 class Migration(migrations.Migration):
@@ -14,7 +13,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Cusine',
+            name='City',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=30)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Cuisine',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=30)),
@@ -25,21 +31,18 @@ class Migration(migrations.Migration):
             name='Dish',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(default=b'dish name', max_length=50)),
+                ('name', models.CharField(default=b'dish name', max_length=50, null=True, blank=True)),
                 ('about', models.CharField(max_length=100, blank=True)),
-                ('vegOrNot', models.CharField(blank=b'True', max_length=1, choices=[(b'V', b'Veg'), (b'N', b'Non Veg'), (b'B', b'Both Veg and Non Veg'), (b'D', b'Drink')])),
             ],
-            options={
-                'ordering': ('name',),
-            },
         ),
         migrations.CreateModel(
-            name='Dish_price_type',
+            name='Dish_price',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('qty', models.CharField(max_length=50, blank=True)),
-                ('price', models.IntegerField(default=0)),
-                ('dish', models.ForeignKey(to='restaurants.Dish')),
+                ('qty_or_name', models.CharField(max_length=50, blank=True)),
+                ('price', models.FloatField(default=0, blank=True)),
+                ('vegOrNot', models.CharField(blank=b'True', max_length=1, choices=[(b'V', b'Veg'), (b'N', b'Non Veg'), (b'B', b'Both Veg and Non Veg'), (b'D', b'Drink')])),
+                ('dish', models.ForeignKey(blank=True, to='restaurants.Dish', null=True)),
             ],
         ),
         migrations.CreateModel(
@@ -48,11 +51,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(default=b'dish type name', max_length=30)),
                 ('vegOrNot', models.CharField(blank=b'True', max_length=1, choices=[(b'V', b'Veg'), (b'N', b'Non Veg'), (b'B', b'Both'), (b'D', b'Drinks'), (b'H', b'Hard Drinks')])),
-                ('num_of_price_types', models.IntegerField(default=1)),
             ],
-            options={
-                'ordering': ('name',),
-            },
         ),
         migrations.CreateModel(
             name='Establishment',
@@ -65,8 +64,9 @@ class Migration(migrations.Migration):
             name='Locality',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('city', models.CharField(max_length=30)),
+                ('part_of_city', models.CharField(default=b'East Delhi', max_length=50)),
                 ('area', models.CharField(max_length=30)),
+                ('city', models.ForeignKey(blank=True, to='restaurants.City', null=True)),
             ],
         ),
         migrations.CreateModel(
@@ -80,21 +80,19 @@ class Migration(migrations.Migration):
             name='Restaurant',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('enable', models.BooleanField(default=True)),
+                ('enable', models.BooleanField(default=False)),
                 ('name', models.CharField(default=b'Restaurant name', max_length=50)),
                 ('about', models.CharField(max_length=500, blank=True)),
                 ('address', models.CharField(max_length=300, blank=True)),
                 ('phone', models.CharField(max_length=13, blank=True)),
-                ('url', models.CharField(default=b'restaurant_name_area_no_space', unique=True, max_length=30, blank=True)),
-                ('image', models.ImageField(null=True, upload_to=apps.restaurants.models.upload_file_name, blank=True)),
-                ('service_charge', models.IntegerField(null=True, blank=True)),
-                ('service_tax', models.IntegerField(null=True, blank=True)),
-                ('service_tax_food', models.IntegerField(null=True, blank=True)),
-                ('service_tax_drinks', models.IntegerField(null=True, blank=True)),
-                ('vat', models.IntegerField(null=True, blank=True)),
-                ('any_other_tax', models.IntegerField(null=True, blank=True)),
-                ('discount', models.IntegerField(null=True, blank=True)),
-                ('cusines', models.ManyToManyField(to='restaurants.Cusine', blank=True)),
+                ('service_charge', models.FloatField(null=True, blank=True)),
+                ('service_tax', models.FloatField(null=True, blank=True)),
+                ('service_tax_food', models.FloatField(null=True, blank=True)),
+                ('service_tax_drinks', models.FloatField(null=True, blank=True)),
+                ('vat', models.FloatField(null=True, blank=True)),
+                ('any_other_tax', models.FloatField(null=True, blank=True)),
+                ('discount', models.FloatField(null=True, blank=True)),
+                ('cuisines', models.ManyToManyField(to='restaurants.Cuisine', blank=True)),
                 ('establishment', models.ManyToManyField(to='restaurants.Establishment', blank=True)),
                 ('locality', models.ForeignKey(to='restaurants.Locality', blank=True)),
             ],
@@ -112,11 +110,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dish',
             name='userDownVotes',
-            field=models.ManyToManyField(related_name='dislike', to='restaurants.Profile', blank=True),
+            field=models.ManyToManyField(related_name='dislike', to=settings.AUTH_USER_MODEL, blank=True),
         ),
         migrations.AddField(
             model_name='dish',
             name='userUpVotes',
-            field=models.ManyToManyField(related_name='likes', to='restaurants.Profile', blank=True),
+            field=models.ManyToManyField(related_name='likes', to=settings.AUTH_USER_MODEL, blank=True),
         ),
     ]

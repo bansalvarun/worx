@@ -20,6 +20,7 @@ from apps.restaurants.urls import url
 from views import *
 from django.conf import settings
 from django.views.static import serve
+from adminplus.sites import AdminSitePlus
 from allauth.urls import *
 # from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # urlpatterns += staticfiles_urlpatterns()

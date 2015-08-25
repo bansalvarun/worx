@@ -152,22 +152,7 @@
 	{{dishtype}}</h4>
 	<blockquote>
 		<ul class="alt">
-			{% if dishtype.commonPrice == True %}
-				<li align="justify">
-					<h4>|
-					{% for price in dishtype.dish_type_pricee_set.all %}
-						<span style="width:200px;">
-						{% if price.vegOrNot == 'V' %}
-							<span style="color:green;padding:0 .5em">&#9679;</span>
-						{% elif price.vegOrNot == 'N' %}
-							<span style="color:red;padding:0 .5em">&#9679;</span>
-						{% endif %}
-						{{price.name}} &#8377;{{price.price}} |
-						</span>
-					{% endfor %}
-					</h4>
-				</li>
-			{% endif %}
+			
 			{% for dish in dishtype.dish_set.all %}
 				<li>
 					<div class="row myRow"  title="tap to place order">
@@ -231,7 +216,7 @@
 												{{price_type}}  
 												</h4>
 											</td>
-											<td style="float:right; width:40px; margin-right:5px; ">
+											<td style="float:right; width:40px; margin-right:15px; ">
 												<h4>&#8377;{{price_type.price}}</h4>
 											</td>
 											<td id='dish{{price_type.id}}' style="float:right; padding-right:0px; width:85px;" > 
@@ -239,7 +224,7 @@
 													
 													
 													<button type="button" class="btn btn-default" onclick="delItem(
-														'qty{{price_type.id}}',
+														'qty_or_name{{price_type.id}}',
 														'{{dish}}',
 														'{{price_type.vegOrNot}}',
 														'{{price_type}}',
@@ -249,9 +234,9 @@
 													)" style="height:25px">
 													<span class="glyphicon glyphicon-minus"></span>
 													</button>
-													<span class="btn " style="height:25px;" ><span class="qty{{price_type.id}}">0</span></span>
+													<span class="btn " style="height:25px;" ><span class="qty_or_name{{price_type.id}}">0</span></span>
 													<button type="button" class="btn btn-default" onclick="addItem(
-														'qty{{price_type.id}}',
+														'qty_or_name{{price_type.id}}',
 														'{{dish}}',
 														'{{price_type.vegOrNot}}',
 														'{{price_type}}',
