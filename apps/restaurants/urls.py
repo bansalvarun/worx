@@ -3,6 +3,7 @@ from apps.restaurants.views import *
 urlpatterns = [
     url(r'^(\d+)/menu/$', menu, name='menu'),
     url(r'^$', restaurants),
+    url(r'^blah/', restaurantsDisable),
     url(r'^cuisines/', cuisines),
     url(r'^localities/', localities),
     url(r'^establishments/', establishments),

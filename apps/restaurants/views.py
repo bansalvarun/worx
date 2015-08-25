@@ -41,6 +41,14 @@ def restaurants(request):
 	args['cities'] = City.objects.all()
 	return render(request, 'restaurants/all.html', args)
 
+def restaurantsDisable(request):
+  args = {}
+  restaurants = Restaurant.objects.filter(enable = False)
+  args['restaurants'] = restaurants
+  return render(request, 'restaurants/all.html', args)
+
+
+
 def menu(request, url):
 	restaurant = get_object_or_404(Restaurant, pk=url)
 	# dish_type_ob = Dish_type.objects.filter(restaurant = restaurant)
