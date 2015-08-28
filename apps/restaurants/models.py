@@ -81,10 +81,13 @@ class Restaurant(Model):
 class Dish_type(Model):
 	restaurant = ForeignKey(Restaurant)
 	name = CharField(max_length=30, default="dish type name")
+	about = CharField(max_length=100, blank=True, null=True)
 	veg_nonveg = (('V', 'Veg'), ('N', "Non Veg"), ('B', "Both"),('D', 'Drinks'), ('H', "Hard Drinks"),)
 	vegOrNot = CharField(max_length=1, choices=veg_nonveg, blank="True")
 	def __unicode__(self):
 		return self.name
+	def get_about(self):
+		return self.about.split(',')
 
 
 class Dish(Model):
@@ -95,6 +98,8 @@ class Dish(Model):
 	userDownVotes = ManyToManyField(User, blank=True, related_name='dislike')
 	def __unicode__(self):
 		return self.name
+	def get_about(self):
+		return self.about.split()
 
 class Dish_price(Model):
 	dish = ForeignKey(Dish, null=True, blank=True)

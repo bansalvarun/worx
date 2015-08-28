@@ -149,20 +149,29 @@
 		{% elif dishtype.vegOrNot == 'H' %}
 		<span class="glyphicon glyphicon-glass" style="color:#ff3a3a"></span>
 		{% endif %}
-	{{dishtype}}</h4>
+		{{dishtype}}
+		</h4>
+			{% for i in dishtype.get_about %}
+				{{i}}
+			{% endfor %}
+
 	<blockquote>
+		
+					
 		<ul class="alt">
-			
 			{% for dish in dishtype.dish_set.all %}
 				<li>
 					<div class="row myRow"  title="tap to place order">
-						<span style="cursor:s-resize" >
-							<h4 style="padding-top:5px; padding-bottom:20px" onclick="expand('ROW{{dish}}')">
+						<span style="cursor:pointer" onclick="expand('ROW{{dish}}')">
+							<h4 style="padding-top:5px;" >
 							{{dish}} 
 							</h4>
+							<p style="padding-bottom:20px">
+								{% for i in dish.get_about %}
+									{{i}}
+								{% endfor %}
+							</p>						
 						</span>
-
-
 						{% if user.id %}
 							<div style="position: absolute;right: 0; margin-top:20px">
 								{% if user in dish.userUpVotes.all %}
