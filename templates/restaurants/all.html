@@ -30,7 +30,7 @@
 								<h3>Restaurants</h3>
 							    {% if restaurants %}
 							      {% for restaurant in restaurants %}
-									<div class="row"><h4 onclick=(location.href="/restaurants/{{restaurant.id}}/menu")>{{restaurant.name}}, {{restaurant.locality}}</h4>
+									<div class="row" style="cursor:pointer"><h4 onclick=(location.href="/restaurants/{{restaurant.id}}/menu")>{{restaurant.name}}, {{restaurant.locality}}</h4>
 									{% if restaurant.image %}
 										<img src="{{restaurant.image}}" alt="" height= "10%" width="10%"/>
 									{% endif %}
