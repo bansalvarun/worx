@@ -151,10 +151,10 @@
 		{% endif %}
 		{{dishtype}}
 		</h4>
-			{% id dishtype %}
-			{% for i in dishtype.get_about %}
-				{{i}}
-			{% endfor %}
+			{% if dishtype.about %}
+				{% for i in dishtype.get_about %}
+					{{i}}
+				{% endfor %}
 			{% endif %}
 
 	<blockquote>
@@ -170,9 +170,11 @@
 							</h4>
 							<p style="padding-bottom:20px">
 							{% if dish %}
-								{% for i in dish.get_about %}
-									{{i}}
-								{% endfor %}
+								{% if dish.about %}
+									{% for i in dish.get_about %}
+										{{i}}
+									{% endfor %}
+								{% endif %}
 							{% endif %}
 							</p>						
 						</span>
