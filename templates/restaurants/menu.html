@@ -151,9 +151,11 @@
 		{% endif %}
 		{{dishtype}}
 		</h4>
+			{% id dishtype %}
 			{% for i in dishtype.get_about %}
 				{{i}}
 			{% endfor %}
+			{% endif %}
 
 	<blockquote>
 		
@@ -167,9 +169,11 @@
 							{{dish}} 
 							</h4>
 							<p style="padding-bottom:20px">
+							{% if dish %}
 								{% for i in dish.get_about %}
 									{{i}}
 								{% endfor %}
+							{% endif %}
 							</p>						
 						</span>
 						{% if user.id %}
