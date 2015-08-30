@@ -12,6 +12,10 @@ For more details contact varun13168@iiitd.ac.in
 	<head>
 		<title>{% block title %}{% endblock %}</title>
 		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<!-- <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css"> -->
@@ -46,8 +50,8 @@ For more details contact varun13168@iiitd.ac.in
 								<a  id='modal-launcher'  data-toggle="modal" data-target="#login-modal" >Sign In</a>
 							{% endif %}
 							{% block navcart %}{% endblock %}
-								<li class="special">
-									<a href="#menu" class="menuToggle" style="text-decoration:None"><span>Menu</span></a>
+								<li class="special" style="padding-right:50px">
+									<a href="#menu" class="menuToggle" style="text-decoration:None" ><span>Menu</span></a>
 									<div id="menu">
 										<ul>
 											<li><a href="/">Home</a></li>											

@@ -12,12 +12,12 @@ admin.site.register(City)
 
 class DishPriceInLine(NestedTabularInline):
 	model = Dish_price
-	extra = 0
+	extra = 3
 	fk_name = 'dish'
 
 class DishInline(NestedStackedInline):
 	model = Dish
-	extra = 1
+	extra = 3
 	exclude = ('userUpVotes','userDownVotes', )
 	filter_horizontal = ('userUpVotes','userDownVotes', )
 	fk_name = 'dish_type'
