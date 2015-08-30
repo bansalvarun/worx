@@ -173,7 +173,7 @@ ACCOUNT_LOGOUT_ON_GET =True
 SOCIALACCOUNT_PROVIDERS = \
     {'facebook':
        {'METHOD': 'oauth2',
-        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'SCOPE': ['email', 'public_profile', 'user_friends', 'publish_stream'],
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
         'FIELDS': [
             'id',
