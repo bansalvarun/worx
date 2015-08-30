@@ -47,7 +47,7 @@ For more details contact varun13168@iiitd.ac.in
 	            					<li><button class="btn btn-default btn-xs" onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';">Sign Out</button></li>
         						</div>
 							{% else %}
-								<a  id='modal-launcher'  data-toggle="modal" data-target="#login-modal" >Sign In</a>
+								<a  id='modal-launcher'  data-toggle="modal" data-target="#login-modal" style="cursor:pointer;">Sign In</a>
 							{% endif %}
 							{% block navcart %}{% endblock %}
 								<li class="special" style="padding-right:50px">
@@ -89,7 +89,7 @@ For more details contact varun13168@iiitd.ac.in
 
 	        		<div class='modal-body-right'>
 	        			<div class="modal-social-icons">
-	        				<a class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
+	        				<a class="btn btn-default facebook" onclick="location.href='{% provider_login_url "facebook" method="oauth2" %}?next={{request.path}}';modify_permissions();"> <i class="fa fa-facebook modal-icons"></i> Facebook </a>
 	        				<a class="btn btn-default google" onclick="location.href='/accounts/google/login/?next={{request.path}}';"> <i class="fa fa-google-plus modal-icons"></i> Google </a>
 	        			</div> 
 	        		</div>	
