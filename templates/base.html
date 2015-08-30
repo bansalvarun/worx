@@ -137,7 +137,13 @@ For more details contact varun13168@iiitd.ac.in
     <!-- Bootstrap Core JavaScript -->
     <script src="{%static "js/bootstrap.min.js" %}"></script>
     <script src="{%static "js/modernizr-2.6.2.min.js" %}"></script>
-
+<script type="text/javascript">
+	function modify_permissions() {
+    var json = JSON.parse($("#allauth-facebook-settings").html());
+    json["loginOptions"]["scope"] = "email, publish_actions";
+    allauth.facebook.init(json);
+}
+</script>
 
 
 	

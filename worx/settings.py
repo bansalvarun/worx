@@ -28,7 +28,7 @@ SECRET_KEY = '$)p&gq(5_5d_@q^mo@^2ebk_r9!@j6qx=^^vsb&*(6$$&8!^gc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 
@@ -192,11 +192,10 @@ SOCIALACCOUNT_PROVIDERS = \
         'VERIFIED_EMAIL': False,
         'VERSION': 'v2.4'}}
 
-function modify_permissions() {
-    var json = JSON.parse($("#allauth-facebook-settings").html());
-    json["loginOptions"]["scope"] = "email, publish_actions";
-    allauth.facebook.init(json);
-}
+
+SOCIALACCOUNT_PROVIDERS = \
+    { 'facebook':
+        { 'LOCALE_FUNC': lambda request: 'en_US'} }
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'worx.',
