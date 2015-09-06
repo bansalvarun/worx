@@ -68,7 +68,7 @@
       	<span style="float:left; margin-right:10%"><a href="" data-toggle="modal" data-target="#gallery">Gallery</a></span><br/>
       	{% endif %}
 
-<form action="/restaurants/like/" method="post" name="myform" id="myform" style="display:none">
+<form method="post" name="myform" id="myform" style="display:none">
 	{% csrf_token %}
     <input id="dishIdForm" type="text" name="dishid" value=''>
     <input id="choiceForm" type="text" name="choice" value=''>
@@ -87,30 +87,11 @@
 		formsubmit(dishid);
 	}	
 	var myjson;
-	function changecolor(){
-      	if(myjson["flag"]=="grey"){
-      		a.style.color = "grey";
-      		b.style.color = "grey";
-      	}
-      	else if(myjson["flag"]=="black"){
-      		a.style.color = "grey";
-      		b.style.color = "black";
-
-      	}
-      	else if(myjson["flag"]=="blue"){
-      		a.style.color = "#1E90FF";
-      		b.style.color = "grey";
-      	}		
-      	a.setAttribute('data-badge', String(myjson["like"]));
-  		b.setAttribute('data-badge', String(myjson['dislike']));
-  		myjson = none;
-	}
 
 	function formsubmit(dish_id){
 		// process the form
-	    $('#myform').submit(function(event) {
-		a.style.visibility="hidden";
-		b.style.visibility="hidden";
+
+	    $('#myform').unbind('submit').bind('submit',function(event) {
 
 	        // get the form data
 	        // there are many ways to get this data using jQuery (you can use the class or id also)
@@ -131,12 +112,14 @@
             	encode          : true,
             	success: function (json) {
 	              // alert('form was submitted');
-					a.style.visibility="initial";
-					b.style.visibility="initial";
 	              	myjson = json;
-
+					changecolor(myjson);
             	},
-
+				statusCode: {
+				500: function() {
+				alert("Script exhausted");
+				}
+				}
 
 	        })
 	            // using the done promise callback
@@ -144,8 +127,28 @@
 	        // stop the form from submitting the normal way and refreshing the page
 	    });
 		$("#myform").submit();
-		changecolor(myjson);
 	}
+	function changecolor(){
+		if(myjson!=null){
+      	if(myjson["flag"]=="grey"){
+      		a.style.color = "grey";
+      		b.style.color = "grey";
+      	}
+      	else if(myjson["flag"]=="black"){
+      		a.style.color = "grey";
+      		b.style.color = "black";
+
+      	}
+      	else if(myjson["flag"]=="blue"){
+      		a.style.color = "#1E90FF";
+      		b.style.color = "grey";
+      	}		
+      	a.setAttribute('data-badge', String(myjson["like"]));
+  		b.setAttribute('data-badge', String(myjson['dislike']));
+  		myjson = null;
+  		}
+	}
+
 </script>
 
 <h3>Menu</h3>
