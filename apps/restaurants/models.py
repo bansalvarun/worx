@@ -62,17 +62,20 @@ class Restaurant(Model):
 	# city = ForeignKey(City, blank=True, null=True)
 	locality = ForeignKey(Locality, blank=True)
 	phone = CharField(max_length=13, blank=True)
+	coverpic = CharField(max_length=100, blank=True, help_text="Please give me the 'Direct Link (email & IM)' from imgur image resolution 1600X900")
+	thumbnail = CharField(max_length=100, blank=True, help_text="Please give me the 'Direct Link (email & IM)' from imgur image resolution 25x25")
+	album = CharField(max_length=300, blank=True, help_text="upload album to imgur.com -> from album url,say 'http://imgur.com/a/mJ4Jf#0' -> get 'a/mJ4Jf' ")
 	# url = CharField(max_length=30, unique=True, default="restaurant_name_area_no_space", blank=True)
 	# image = ImageField(upload_to=upload_file_name, blank=True, null=True)
 	cuisines = ManyToManyField(Cuisine, blank=True)
 	establishment = ManyToManyField(Establishment, blank=True)
 	service_charge = FloatField(blank=True, null=True)
-	service_tax = FloatField(blank=True,null=True)
 	service_tax_food = FloatField(blank=True,null=True)
 	service_tax_drinks = FloatField(blank=True,null=True)
+	service_tax_hardDrinks = FloatField(blank=True,null=True)
 	vat = FloatField(blank=True,null=True)
-	any_other_tax = FloatField(blank=True, null=True)
-	discount = FloatField(blank=True, null=True)
+	# any_other_tax = FloatField(blank=True, null=True)
+	# discount = FloatField(blank=True, null=True)
 	def __unicode__(self):
 		return self.name
 	def get_establishments(self):

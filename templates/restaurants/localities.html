@@ -42,9 +42,12 @@
 											<blockquote>
 											<ul class="alt">
 												{% for restaurant in locality.restaurant_set.all %}
-													<li><div class="row"><h4><a href="/restaurants/{{restaurant.id}}/menu">{{restaurant}}, {{restaurant.locality}}</a></h4>
-													{% if restaurant.image %}
-														<img src="" alt="" height= "8%" width="8%"/></div></li>
+													{% if restaurant.enable %}
+														<li><div class="row"><h4><a href="/restaurants/{{restaurant.id}}/menu">
+														{% if restaurant.thumbnail %}
+															<img src="{{restaurant.thumbnail}}" width=5% height='auto'>      
+														{% endif %}
+														{{restaurant}}, {{restaurant.locality}}</a></h4>
 													{% endif %}
 												{% endfor %}
 											</ul>
