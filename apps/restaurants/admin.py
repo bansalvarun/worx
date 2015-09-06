@@ -8,12 +8,16 @@ admin.site.register(Cuisine)
 admin.site.register(Establishment)
 admin.site.register(Locality)
 admin.site.register(City)
-
-
+admin.site.register(Notifications)
 class DishPriceInLine(NestedTabularInline):
 	model = Dish_price
 	extra = 3
 	fk_name = 'dish'
+
+class NotificationsInLine(NestedStackedInline):
+	model = Notifications
+	extra = 0
+	fk_name = 'restaurant'
 
 class DishInline(NestedStackedInline):
 	model = Dish
@@ -34,10 +38,10 @@ class DishTypeInline(NestedStackedInline):
 class RestaurantAdmin(NestedModelAdmin):
 	model = Restaurant
 	filter_horizontal = ('cuisines','establishment',)
-	inlines = [DishTypeInline]
 	list_display = ('name', 'locality','phone', 'get_establishments')
 	list_filter = ['cuisines', 'locality', 'establishment',]
 	search_fields = ['name', 'cuisines', 'locality', 'establishment',]
+	inlines = [NotificationsInLine, DishTypeInline]
 
 
 admin.site.register(Restaurant, RestaurantAdmin)

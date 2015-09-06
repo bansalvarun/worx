@@ -24,7 +24,9 @@
 
 {% block nav %}
 	<li><a href="/restaurants" >Restaurants</a></li>
-    
+    {% for notification in restaurant.notifications_set.all %}
+    	<li><h4>{{notification.title}}</h4><p>{{notification.about}}</p></li>
+	{% endfor %}
 
 {% endblock %}
 
