@@ -41,10 +41,21 @@ For more details contact varun13168@iiitd.ac.in
 						<nav id="nav" >
 							<ul >
 							{% if user.id %}
-								<a class="dropdown-toggle" style="text-decoration:None" href="#" data-toggle="dropdown">{{user.first_name}}<strong class="caret"></strong></a>
+
+								<a class="dropdown-toggle" style="text-decoration:None" href="#" data-toggle="dropdown">
+								{{user.first_name}}
+								<strong class="caret"></strong></a>
 	            				<div class="dropdown-menu" style="padding: 0px 0px 0px 0px;">
 <!-- 	            					<button class="btn btn-default" onClick="location.href='/profile/'">Profile</button><br/> -->
-	            					<li><button class="btn btn-default btn-xs" onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';">Sign Out</button></li>
+									{% if user.is_staff %}
+									<li>
+										<a href="/admin/">Admin Panel</a>
+									</li>
+									{% endif %}
+	            					<li>
+	            						<a onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';" style="cursor:pointer">Sign Out</a>
+	            					</li>
+<!-- 	            					<li><button class="btn btn-default btn-xs" onclick="location.href='{% url 'account_logout' %}?next={{request.path}}';">Sign Out</button></li> -->
         						</div>
 							{% else %}
 								<a  id='modal-launcher'  data-toggle="modal" data-target="#login-modal" style="cursor:pointer;">Sign In</a>
