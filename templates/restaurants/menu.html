@@ -55,15 +55,17 @@
 		
 		</h3>
 		<p>Phone:&nbsp&nbsp{{restaurant.phone}}</p>
+		{% if restaurant.facebook %}
+		<span style="float:center;"><a href="{{restaurant.facebook}}"  target="_blank">
+			<img src="{%static "img/fb.png" %}" width=10% height="auto" />
+		</a></span><br/>
+      	{% endif %}
 	</header>
 
 <section class="wrapper style5">
       	
 
 <div class="inner">
-		{% if restaurant.facebook %}
-		<span style="float:left; margin-right:10%"><a href="{{restaurant.facebook}}"  target="_blank">Check-In@Facebook</a></span><br/>
-      	{% endif %}
       	{% if restaurant.album %}
       	<span style="float:left; margin-right:10%"><a href="" data-toggle="modal" data-target="#gallery">Gallery</a></span><br/>
       	{% endif %}
