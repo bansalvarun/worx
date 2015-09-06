@@ -58,6 +58,7 @@ class Restaurant(Model):
 	enable = BooleanField(default=False)
 	name = CharField(max_length=50, default="Restaurant name")
 	about = CharField(max_length=500, blank=True)
+	facebook = CharField(max_length=100, blank=True)
 	address = CharField(max_length=300, blank=True)
 	# city = ForeignKey(City, blank=True, null=True)
 	locality = ForeignKey(Locality, blank=True)

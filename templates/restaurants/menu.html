@@ -50,14 +50,23 @@
 		<img src="{{restaurant.thumbnail}}" width=5% height='auto'>      
 		{% endif %}
 		{{restaurant}}, {{restaurant.locality}}</h2>
-		<h3>{{restaurant.about}}</h3>
+		<h3>{{restaurant.about}}
+		
+		
+		</h3>
 		<p>Phone:&nbsp&nbsp{{restaurant.phone}}</p>
 	</header>
 
 <section class="wrapper style5">
+      	
+
 <div class="inner">
-
-
+		{% if restaurant.facebook %}
+		<span style="float:left; margin-right:10%"><a href="{{restaurant.facebook}}"  target="_blank">Check-In@Facebook</a></span><br/>
+      	{% endif %}
+      	{% if restaurant.album %}
+      	<span style="float:left; margin-right:10%"><a href="" data-toggle="modal" data-target="#gallery">Gallery</a></span><br/>
+      	{% endif %}
 
 <form action="/restaurants/like/" method="post" name="myform" id="myform" style="display:none">
 	{% csrf_token %}
@@ -128,10 +137,6 @@
 	}
 </script>
 
-      <button type="button" class="btn btn btn-s" style="float:left;  " data-toggle="modal" data-target="#gallery">
-        Gallery 
-      </button>
-<br/><br/>
 <h3>Menu</h3>
 
 		<div id="sticky-anchor"></div>
