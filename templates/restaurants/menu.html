@@ -55,10 +55,10 @@
 		
 		</h3>
 		<p>Phone:&nbsp&nbsp{{restaurant.phone}}</p>
-		{% if restaurant.facebook %}
 		<span style="float:center;"><a href="{{restaurant.facebook}}"  target="_blank">
-			<img src="{%static "img/fb.png" %}" width=10% height="auto" />
+			<img src="{%static "img/fb.png" %}" style="max-width:150px;width=15%;height=auto" />
 		</a></span><br/>
+		{% if restaurant.facebook %}
       	{% endif %}
 	</header>
 
