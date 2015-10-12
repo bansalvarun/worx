@@ -30,7 +30,7 @@ SECRET_KEY = '$)p&gq(5_5d_@q^mo@^2ebk_r9!@j6qx=^^vsb&*(6$$&8!^gc'
 
 DEBUG = False
 ALLOWED_HOSTS = ['*']
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
 
 
 # Application definition

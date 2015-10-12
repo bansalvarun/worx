@@ -24,7 +24,7 @@ from django.views.static import serve
 from allauth.urls import *
 # from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # urlpatterns += staticfiles_urlpatterns()
-
+handler404= 'worx.views.error404'
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
@@ -32,11 +32,12 @@ urlpatterns = [
     # url(r'^accounts/logout/', logout),
     url(r'^restaurants/', include('apps.restaurants.urls')),
     url(r'^loaderio-478d2141c8b3b653e6190dcff0b4518c/', loaderVerify),
-    url(r'^(?P<url>.+)/', menu2),
+#    url(r'^abc/', menu2),
+    url(r'^(?P<url>.+)/$', menu2),
     url(r'^404/$', error404),
     url(r'^$', home),
     url(r'^profile/$', profile),
     url(r'^grappelli/', include('grappelli.urls')),
 ]
 
-handler404 = 'error404'
+

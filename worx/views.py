@@ -7,6 +7,8 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 import datetime
 
+def error404(request):
+  return render(request, '404.html')
 @login_required(login_url='/accounts/login/')
 def profile(request):
   # userp = get_object_or_404(Profile, pk=url)
