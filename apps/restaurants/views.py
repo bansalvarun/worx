@@ -55,8 +55,8 @@ def menu(request, url):
 	args = {}
 	args['restaurant'] = restaurant
 	return render(request, 'restaurants/menu.html', args)
-def menu2(request, url2):
-	restaurant = get_object_or_404(Restaurant, url2=url2)
+def menu2(request, url):
+	restaurant = get_object_or_404(Restaurant, url=url)
 	# dish_type_ob = Dish_type.objects.filter(restaurant = restaurant)
 	args = {}
 	args['restaurant'] = restaurant
