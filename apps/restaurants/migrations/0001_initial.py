@@ -50,6 +50,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(default=b'dish type name', max_length=30)),
+                ('about', models.CharField(max_length=100, null=True, blank=True)),
                 ('vegOrNot', models.CharField(blank=b'True', max_length=1, choices=[(b'V', b'Veg'), (b'N', b'Non Veg'), (b'B', b'Both'), (b'D', b'Drinks'), (b'H', b'Hard Drinks')])),
             ],
         ),
@@ -70,6 +71,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Notifications',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=100)),
+                ('about', models.TextField()),
+            ],
+        ),
+        migrations.CreateModel(
             name='Profile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -83,19 +92,26 @@ class Migration(migrations.Migration):
                 ('enable', models.BooleanField(default=False)),
                 ('name', models.CharField(default=b'Restaurant name', max_length=50)),
                 ('about', models.CharField(max_length=500, blank=True)),
+                ('facebook', models.CharField(max_length=100, blank=True)),
                 ('address', models.CharField(max_length=300, blank=True)),
                 ('phone', models.CharField(max_length=13, blank=True)),
+                ('coverpic', models.CharField(help_text=b"Please give me the 'Direct Link (email & IM)' from imgur image resolution 1600X900", max_length=100, blank=True)),
+                ('thumbnail', models.CharField(help_text=b"Please give me the 'Direct Link (email & IM)' from imgur image resolution 25x25", max_length=100, blank=True)),
+                ('album', models.CharField(help_text=b"upload album to imgur.com -> from album url,say 'http://imgur.com/a/mJ4Jf#0' -> get 'a/mJ4Jf' ", max_length=300, blank=True)),
                 ('service_charge', models.FloatField(null=True, blank=True)),
-                ('service_tax', models.FloatField(null=True, blank=True)),
                 ('service_tax_food', models.FloatField(null=True, blank=True)),
                 ('service_tax_drinks', models.FloatField(null=True, blank=True)),
+                ('service_tax_hardDrinks', models.FloatField(null=True, blank=True)),
                 ('vat', models.FloatField(null=True, blank=True)),
-                ('any_other_tax', models.FloatField(null=True, blank=True)),
-                ('discount', models.FloatField(null=True, blank=True)),
                 ('cuisines', models.ManyToManyField(to='restaurants.Cuisine', blank=True)),
                 ('establishment', models.ManyToManyField(to='restaurants.Establishment', blank=True)),
                 ('locality', models.ForeignKey(to='restaurants.Locality', blank=True)),
             ],
+        ),
+        migrations.AddField(
+            model_name='notifications',
+            name='restaurant',
+            field=models.ForeignKey(to='restaurants.Restaurant'),
         ),
         migrations.AddField(
             model_name='dish_type',
