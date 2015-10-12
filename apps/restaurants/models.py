@@ -67,6 +67,7 @@ class Restaurant(Model):
 	album = CharField(max_length=300, blank=True, help_text="upload album to imgur.com -> from album url,say 'http://imgur.com/a/mJ4Jf#0' -> get 'a/mJ4Jf' ")
 	cuisines = ManyToManyField(Cuisine, blank=True)
 	establishment = ManyToManyField(Establishment, blank=True)
+	url = CharField(blank=True, max_length=50)
 	service_charge = FloatField(blank=True, null=True)
 	service_tax_food = FloatField(blank=True,null=True)
 	service_tax_drinks = FloatField(blank=True,null=True)

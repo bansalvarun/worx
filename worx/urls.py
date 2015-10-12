@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from apps.restaurants.urls import url
+from apps.restaurants.views import menu2
 from views import *
 from django.conf import settings
 from django.views.static import serve
@@ -31,6 +32,7 @@ urlpatterns = [
     # url(r'^accounts/logout/', logout),
     url(r'^restaurants/', include('apps.restaurants.urls')),
     url(r'^loaderio-478d2141c8b3b653e6190dcff0b4518c/', loaderVerify),
+    url(r'^/(?P<url>.+)/', menu2),
     url(r'^404/$', error404),
     url(r'^$', home),
     url(r'^profile/$', profile),
