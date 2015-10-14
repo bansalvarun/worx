@@ -98,6 +98,7 @@ class Migration(migrations.Migration):
                 ('coverpic', models.CharField(help_text=b"Please give me the 'Direct Link (email & IM)' from imgur image resolution 1600X900", max_length=100, blank=True)),
                 ('thumbnail', models.CharField(help_text=b"Please give me the 'Direct Link (email & IM)' from imgur image resolution 25x25", max_length=100, blank=True)),
                 ('album', models.CharField(help_text=b"upload album to imgur.com -> from album url,say 'http://imgur.com/a/mJ4Jf#0' -> get 'a/mJ4Jf' ", max_length=300, blank=True)),
+                ('url', models.CharField(unique=True, max_length=50)),
                 ('service_charge', models.FloatField(null=True, blank=True)),
                 ('service_tax_food', models.FloatField(null=True, blank=True)),
                 ('service_tax_drinks', models.FloatField(null=True, blank=True)),
