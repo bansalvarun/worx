@@ -116,3 +116,4 @@ class Notifications(Model):
 	about = TextField()
 	def __unicode__(self):
 		return self.title
+

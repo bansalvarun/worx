@@ -126,3 +126,18 @@
 		}
 
 	}
+
+	function submitBill(){
+		var tbl = document.getElementById("mycart");
+		console.log(tbl.innerText);
+		var txt = tbl.innerText;
+		txt = txt.split(txt[0]);
+		var mybillstring = "";
+		for(i = 0; i<txt.length; i++){
+			mybillstring +=txt[i];
+			mybillstring +=";";
+		}
+		document.getElementById("mycartValue").setAttribute('value', mybillstring);
+		$("#billForm").submit();
+
+	}

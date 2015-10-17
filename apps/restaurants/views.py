@@ -11,8 +11,27 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
-
+import unicodedata
+def splitBill(request):
+  if 'q' in request.GET and request.GET['q']:
+    q = request.GET['q']
+    args = {}
+    items = q
+    items = unicodedata.normalize('NFKD', q).encode('ascii','ignore')
+    items = items.split(";")
+    items = items[1:-1]
+    # items = list(items.decode("utf-8"))
+    for i in range(len(items)):
+      items[i] = items[i].split()
+      item = items[i]
+      item[-2] = int(item[-2])
+      items[i] = item
+    for i in range(len(items)):
+      print type(items[i])
+    args['bill'] = items
+    return render(request, 'restaurants/splitBill.html', args)
+  else:
+    return render(request, 'restaurants/splitBill.html')
 
 def search(request):
     if 'q' in request.GET and request.GET['q']:

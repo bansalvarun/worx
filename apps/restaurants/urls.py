@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^establishments/$', establishments),
     url(r'^search/', search),    
     url(r'^like/', likeDish, name='like'),
+
 ]
