@@ -76,10 +76,9 @@ function delItem(qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId){
 	sessionStorage.setItem('mylistPriceType', mylistPriceType);
 
 }
-
 function submitBill(){
-	var tbl = document.getElementById("mycart");
-	var txt = tbl.innerText;
+	var tbl2 = document.getElementById("mycart");
+	var txt = tbl2.innerText;
 	txt = txt.split(txt[0]);
 	var mybillstring = "";
 	for(i = 0; i<txt.length; i++){
