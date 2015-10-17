@@ -46,9 +46,9 @@ function addItem (qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId) 
 	cell2.innerHTML = sym + String(priceType);
 	cell3.innerHTML = document.getElementById(String(tdClass)).innerHTML;
 	cell4.innerHTML = "&#8377;" + String(price);
-	console.log(mylistPriceType);
+	// console.log(mylistPriceType);
 	sessionStorage.setItem('mylistPriceType', mylistPriceType);
-	console.log( "yo yo "+sessionStorage.getItem('mylistPriceType'));
+	// console.log( "yo yo "+sessionStorage.getItem('mylistPriceType'));
 
 }
 function delItem(qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId){
@@ -79,7 +79,6 @@ function delItem(qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId){
 
 function submitBill(){
 	var tbl = document.getElementById("mycart");
-	console.log(tbl.innerText);
 	var txt = tbl.innerText;
 	txt = txt.split(txt[0]);
 	var mybillstring = "";

@@ -354,7 +354,7 @@
 				<input class="mdl-textfield__input" type="text" id ="mycartValue"name="q" display="none"/>
           </form>
 
-          <button type="button" class="btn btn-info btn-xs" onclick="window.location.reload()" >Reset</button>
+          <button type="button" class="btn btn-info btn-xs" onclick="resetCart()" >Reset</button>
         </div>
       </div>
     </div>
@@ -464,11 +464,7 @@ $(function () {
 				{% endfor %}
 			{% endfor %}
 		{% endfor %}	
-		// console.log($('.finalpay')[0].innerHTML);
-		// console.log($('.finalpay')[1].innerHTML);
 		sessionStorage.setItem('finalpay0', $('.finalpay')[0].innerHTML);
-		// sessionStorage.setItem('finalpay1', $('..finalpay')[1].innerHTML);
-		// console.log("yo "+$('.myCartClass')[0].innerHTML);
 		sessionStorage.setItem('myCartTable', $('.myCartClass')[0].innerHTML);
 	}
 
@@ -485,12 +481,33 @@ $(function () {
 	    var finalpay0 = sessionStorage.getItem('finalpay0');
 	    if (finalpay0 !== null) $('.finalpay').html(finalpay0);
 	    if (finalpay0 !== null) $('.total').html(finalpay0);
-
 		var mytbl = sessionStorage.getItem('myCartTable');
 		if(mytbl!==null) $('.myCartClass').html(mytbl);
-		// console.log(mytbl);
-
 }
+function resetCart(){
+	var i = sessionStorage.length;
+	while(i--) {
+	  var key = sessionStorage.key(i);
+	  if(key!=mylistPriceType){
+		  sessionStorage.removeItem(key);
+	  }
+	}
+	{% for dishtype in restaurant.dish_type_set.all %}
+		{% for dish in dishtype.dish_set.all %}
+			{% for price_type in dish.dish_price_set.all %}
+			    var count{{price_type.id}} = sessionStorage.getItem('count{{price_type.id}}');
+			    if (count{{price_type.id}} !== null) $('.qty_or_name{{price_type.id}}').html(count{{price_type.id}});
+			    else $('.qty_or_name{{price_type.id}}').html(0);
+			{% endfor %}
+		{% endfor %}
+	{% endfor %}	
+    var finalpay0 = sessionStorage.getItem('finalpay0');
+    $('.finalpay').html(0);
+    $('.total').html(0);
+	var mytbl = sessionStorage.getItem('myCartTable');
+	if(mytbl!==null) $('.myCartClass').html(mytbl);
+}
+
 </script>
 
 
