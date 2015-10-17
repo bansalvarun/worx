@@ -73,7 +73,7 @@ For more details contact varun13168@iiitd.ac.in
 								<a  id='modal-launcher'  data-toggle="modal" data-target="#login-modal" style="cursor:pointer;">Sign In</a>
 							{% endif %}
 							{% block navcart %}{% endblock %}
-								<li class="special" >
+								<li class="special menuPadRight" id="menuRightTop" style="padding-right:0px">
 									<a href="#menu" class="menuToggle" style="text-decoration:None" ><span>Menu</span></a>
 									<div id="menu">
 										<ul>
@@ -83,6 +83,13 @@ For more details contact varun13168@iiitd.ac.in
 										</ul>
 									</div>
 								</li>
+<script type="text/javascript">
+var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+if(isFirefox==true){
+	document.getElementById('menuRightTop').style="padding-right:100px";
+}
+</script>
+
 							</ul>
 						</nav>
 					</header>
