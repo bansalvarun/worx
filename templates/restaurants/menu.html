@@ -254,7 +254,8 @@
 							</div>
 						{% endif %}
 					</div>
-					<div id="ROW{{dish}}" style="display: none;">
+					<!-- style="display: none;" -->
+					<div id="ROW{{dish}}" >
 						<blockquote >
 							<table class="table table-condensed" style="border:0px">
 								<tbody>
@@ -272,6 +273,7 @@
 											<td style="float:right; width:40px; margin-right:15px; ">
 												<h4>&#8377;{{price_type.price}}</h4>
 											</td>
+											<!-- afafafafasfasfasfafafa -->
 											<td id='dish{{price_type.id}}' style="float:right; padding-right:0px; width:85px;" > 
 												<div class="btn-default btn-group btn-group-xs " role="group" aria-label="...">
 													
@@ -327,7 +329,7 @@
         </div>
         <div class="modal-body" style="font-size:10px">
         	
-			<table class="table table-condensed col-md-4" id="mycart">
+			<table class="table table-condensed col-md-4 myCartClass" id="mycart" >
 
 			</table>
 			<hr><hr>
@@ -347,7 +349,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-default btn-xs" onclick="submitBill()">Split Bill</button>
+          <!-- <button type="button" class="btn btn-default btn-xs" onclick="submitBill()">Split Bill</button> -->
           <form action="/splitBill/" method="get" style="display:none" id="billForm">
 				<input class="mdl-textfield__input" type="text" id ="mycartValue"name="q" display="none"/>
           </form>
@@ -452,6 +454,45 @@ $(function () {
 });	
 
 </script>
+
+<script type="text/javascript">
+	window.onbeforeunload = function() {
+		{% for dishtype in restaurant.dish_type_set.all %}
+			{% for dish in dishtype.dish_set.all %}
+				{% for price_type in dish.dish_price_set.all %}
+					sessionStorage.setItem('count{{price_type.id}}', $('.qty_or_name{{price_type.id}}')[0].innerHTML);
+				{% endfor %}
+			{% endfor %}
+		{% endfor %}	
+		// console.log($('.finalpay')[0].innerHTML);
+		// console.log($('.finalpay')[1].innerHTML);
+		sessionStorage.setItem('finalpay0', $('.finalpay')[0].innerHTML);
+		// sessionStorage.setItem('finalpay1', $('..finalpay')[1].innerHTML);
+		// console.log("yo "+$('.myCartClass')[0].innerHTML);
+		sessionStorage.setItem('myCartTable', $('.myCartClass')[0].innerHTML);
+	}
+
+	window.onload = function() {
+		{% for dishtype in restaurant.dish_type_set.all %}
+			{% for dish in dishtype.dish_set.all %}
+				{% for price_type in dish.dish_price_set.all %}
+				    var count{{price_type.id}} = sessionStorage.getItem('count{{price_type.id}}');
+				    if (count{{price_type.id}} !== null) $('.qty_or_name{{price_type.id}}').html(count{{price_type.id}});
+				    else $('.qty_or_name{{price_type.id}}').html(0);
+				{% endfor %}
+			{% endfor %}
+		{% endfor %}	
+	    var finalpay0 = sessionStorage.getItem('finalpay0');
+	    if (finalpay0 !== null) $('.finalpay').html(finalpay0);
+	    if (finalpay0 !== null) $('.total').html(finalpay0);
+
+		var mytbl = sessionStorage.getItem('myCartTable');
+		if(mytbl!==null) $('.myCartClass').html(mytbl);
+		// console.log(mytbl);
+
+}
+</script>
+
 
 <script src="{%static "js/cart.js" %}"></script>
 <script src="{%static "js/menu.js" %}"></script>
