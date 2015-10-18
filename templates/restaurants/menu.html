@@ -297,7 +297,8 @@
 														'{{price_type}}',
 														'dish{{price_type.id}}',
 														'{{price_type.price}}',
-														'varun{{price_type.id}}'
+														'varun{{price_type.id}}',
+														'{{restaurant.id}}'
 													)" style="height:25px">
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
@@ -460,58 +461,70 @@ $(function () {
 		{% for dishtype in restaurant.dish_type_set.all %}
 			{% for dish in dishtype.dish_set.all %}
 				{% for price_type in dish.dish_price_set.all %}
-					sessionStorage.setItem('count{{price_type.id}}', $('.qty_or_name{{price_type.id}}')[0].innerHTML);
+					sessionStorage.setItem('{{restaurant.id}}count{{price_type.id}}', $('.qty_or_name{{price_type.id}}')[0].innerHTML);
 				{% endfor %}
 			{% endfor %}
 		{% endfor %}	
-		sessionStorage.setItem('finalpay0', $('.finalpay')[0].innerHTML);
-		sessionStorage.setItem('myCartTable', $('.myCartClass')[0].innerHTML);
+		sessionStorage.setItem('{{restaurant.id}}finalpay0', $('.finalpay')[0].innerHTML);
+		sessionStorage.setItem('{{restaurant.id}}myCartTable', $('.myCartClass')[0].innerHTML);
 	}
 
 	window.onload = function() {
 		{% for dishtype in restaurant.dish_type_set.all %}
 			{% for dish in dishtype.dish_set.all %}
 				{% for price_type in dish.dish_price_set.all %}
-				    var count{{price_type.id}} = sessionStorage.getItem('count{{price_type.id}}');
+				    var count{{price_type.id}} = sessionStorage.getItem('{{restaurant.id}}count{{price_type.id}}');
 				    if (count{{price_type.id}} !== null) $('.qty_or_name{{price_type.id}}').html(count{{price_type.id}});
 				    else $('.qty_or_name{{price_type.id}}').html(0);
 				{% endfor %}
 			{% endfor %}
 		{% endfor %}	
-	    var finalpay0 = sessionStorage.getItem('finalpay0');
+	    var finalpay0 = sessionStorage.getItem('{{restaurant.id}}finalpay0');
 	    if (finalpay0 !== null) $('.finalpay').html(finalpay0);
 	    if (finalpay0 !== null) $('.total').html(finalpay0);
-		var mytbl = sessionStorage.getItem('myCartTable');
+		var mytbl = sessionStorage.getItem('{{restaurant.id}}myCartTable');
 		if(mytbl!==null) $('.myCartClass').html(mytbl);
 }
 function resetCart(){
 	var i = sessionStorage.length;
 	while(i--) {
 	  var key = sessionStorage.key(i);
-	  if(key!="mylistPriceType"){
+	  var blah = {{restaurant.id}}+'mylistPriceType';
+	  blah = String(blah);
+	  console.log(key);
+	  if(key!= blah){
 		  sessionStorage.removeItem(key);
-		  console.log(key);
+		  // console.log(key);
 	  }
 	}
 	{% for dishtype in restaurant.dish_type_set.all %}
 		{% for dish in dishtype.dish_set.all %}
 			{% for price_type in dish.dish_price_set.all %}
-			    var count{{price_type.id}} = sessionStorage.getItem('count{{price_type.id}}');
+			    var count{{price_type.id}} = sessionStorage.getItem('{{restaurant.id}}count{{price_type.id}}');
 			    if (count{{price_type.id}} !== null) $('.qty_or_name{{price_type.id}}').html(count{{price_type.id}});
 			    else $('.qty_or_name{{price_type.id}}').html(0);
 			{% endfor %}
 		{% endfor %}
 	{% endfor %}	
-    var finalpay0 = sessionStorage.getItem('finalpay0');
+    var finalpay0 = sessionStorage.getItem('{{restaurant.id}}finalpay0');
     $('.finalpay').html(0);
     $('.total').html(0);
-	var mytbl = sessionStorage.getItem('myCartTable');
+	var mytbl = sessionStorage.getItem('{{restaurant.id}}myCartTable');
 	if(mytbl!==null) $('.myCartClass').html(mytbl);
 }
 
 </script>
 
-
+<script type="text/javascript">
+mylistPriceType = [];
+if(sessionStorage.getItem('{{restaurant.id}}mylistPriceType')!==null){
+	var mylistPriceTypeString = sessionStorage.getItem('{{restaurant.id}}mylistPriceType');
+	mylistPriceTypeString = mylistPriceTypeString.split(',');
+	for(i = 0; i<mylistPriceTypeString.length; i++){
+		mylistPriceType.push(mylistPriceTypeString[i]);
+	}
+}	
+</script>
 <script src="{%static "js/cart.js" %}"></script>
 <script src="{%static "js/menu.js" %}"></script>
 </body>

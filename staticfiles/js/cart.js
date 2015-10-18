@@ -1,13 +1,6 @@
-mylistPriceType = [];
-if(sessionStorage.getItem('mylistPriceType')!==null){
-	var mylistPriceTypeString = sessionStorage.getItem('mylistPriceType');
-	mylistPriceTypeString = mylistPriceTypeString.split(',');
-	for(i = 0; i<mylistPriceTypeString.length; i++){
-		mylistPriceType.push(mylistPriceTypeString[i]);
-	}
-}
+
 // var itemQty;
-function addItem (qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId) {
+function addItem (qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId, restoID) {
 	itemQty = document.getElementsByClassName(String(qtyID))[0].innerHTML;
 	document.getElementsByClassName(String(qtyID))[0].innerHTML = String(1 + Number(itemQty));
 	var table = document.getElementById("mycart");
@@ -47,7 +40,7 @@ function addItem (qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId) 
 	cell3.innerHTML = document.getElementById(String(tdClass)).innerHTML;
 	cell4.innerHTML = "&#8377;" + String(price);
 	// console.log(mylistPriceType);
-	sessionStorage.setItem('mylistPriceType', mylistPriceType);
+	sessionStorage.setItem(restoID+'mylistPriceType', mylistPriceType);
 	// console.log( "yo yo "+sessionStorage.getItem('mylistPriceType'));
 
 }
@@ -73,7 +66,7 @@ function delItem(qtyID, dishName, vOn, priceType, tdClass, price, priceTypeId){
 			return;
 		}
 	}
-	sessionStorage.setItem('mylistPriceType', mylistPriceType);
+	sessionStorage.setItem('{{restaurant.id}}mylistPriceType', mylistPriceType);
 
 }
 function submitBill(){
