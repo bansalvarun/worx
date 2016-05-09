@@ -1,3 +1,55 @@
-{%for item in bill %}
-<h1>{{item}}</h1>
-{% endfor %}
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+| Restaurants | Cuisines
+{% endblock %}
+
+
+{% block nav2 %}
+	<nav id= "nav" style="left:22px; top:13px">
+		<a href="/"><h4>WORX.</h4></a>
+	</nav>
+{% endblock %}
+
+
+
+{% block nav %}
+	<li><a href="/restaurants/">Restaurants</a></li>
+	<li><a href="/restaurants/cuisines/">Cuisines</a></li>
+	<li><a href="/restaurants/localities/">Localities</a></li>
+	<li><a href="/restaurants/establishments/">Establishments</a></li>
+{% endblock %}
+
+{% block content %}
+			<body>
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Split Bill Among your friends</h2>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								{%for item in bill %}
+								<h3>{{item.name}} {{item.qtyName}} {{item.qty}} {{item.price}}</h3>
+								{% endfor %}
+							</div>
+						</section>
+					</article>
+
+<script type="text/javascript">
+	var dish = [];
+	var dishes = [];
+	console.log("{{bill}}");
+	var bill = "{{bill}}";
+	// console.log(bill.length);
+	// for(var i=0; i<bill.length; i++){
+		// console.log(bill[i]);
+		// console.log("\n");
+	// }
+	console.log(bill[0]);
+	// console.log(bill[1]);
+	console.log(bill.length);
+</script>
+{% endblock %}

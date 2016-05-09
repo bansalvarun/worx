@@ -26,9 +26,17 @@ def splitBill(request):
       item = items[i]
       item[-2] = int(item[-2])
       items[i] = item
+    itemsList =[]
     for i in range(len(items)):
-      print type(items[i])
-    args['bill'] = items
+      it = items[i]
+      item = Item(it[-3] , int(it[-2]) , float(it[-1]))
+      if(len(it)>3):
+        item.qtyName = it[0]  
+      else:
+        item.qtyName = ""
+      itemsList.append(item)
+    args['bill'] = itemsList
+
     return render(request, 'restaurants/splitBill.html', args)
   else:
     return render(request, 'restaurants/splitBill.html')

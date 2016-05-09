@@ -117,3 +117,15 @@ class Notifications(Model):
 	def __unicode__(self):
 		return self.title
 
+class Item(Model):
+	name = CharField(max_length="100")
+	qtyName = CharField(max_length="100", blank=True, null=True)
+	qty = IntegerField()
+	price = FloatField()
+	def __unicode__(self):
+		return self.name + " "+self.qtyName
+	def __init__(self,a,b,c):
+		self.name = a
+		self.qty = b
+		self.price = c
+		
