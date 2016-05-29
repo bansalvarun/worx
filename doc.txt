@@ -1,0 +1,37 @@
+worx.co.in
+1) in house dining system
+every table has some sort of hardware
+including nfc chip and qr code
+they wither need to tap on the nfc
+or scan the qr code
+once they do either of it
+they will be redirected to the worx page where teh restaurant's menu will be available
+us menu me they can see the dishes
+Every dish will have upvotes and downvotes count given by the users
+and they can place their orders
+the waiter will get the selected items to them
+and once the order is complete
+they will get the payment option
+payment can be either cash/wallet money
+
+
+
+2) restaurant publicity
+every restaurant will have a page
+like zomato
+jaha pe sneak in cheez hogi
+a short say 15-30sec video showing the ambience of the restaurant
+pictures
+and other details
+
+3) restaurant end pe
+in kitchen there will be lled
+jispe orders display ho rhe honhe
+table wise
+
+
+1) worx log on top left, remove sign in from header
+mae sign in button red
+2) header:  
+
+3) footer our partners
